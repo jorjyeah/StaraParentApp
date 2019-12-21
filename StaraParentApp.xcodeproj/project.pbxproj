@@ -16,6 +16,7 @@
 		B9B8E7D723AE09690071D058 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9B8E7D523AE09690071D058 /* LaunchScreen.storyboard */; };
 		B9B8E7E223AE09690071D058 /* StaraParentAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8E7E123AE09690071D058 /* StaraParentAppTests.swift */; };
 		B9B8E7ED23AE09690071D058 /* StaraParentAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8E7EC23AE09690071D058 /* StaraParentAppUITests.swift */; };
+		B9B8E7FD23AE0A8A0071D058 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B8E7FC23AE0A8A0071D058 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		B9B8E7E823AE09690071D058 /* StaraParentAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StaraParentAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B8E7EC23AE09690071D058 /* StaraParentAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaraParentAppUITests.swift; sourceTree = "<group>"; };
 		B9B8E7EE23AE09690071D058 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9B8E7FA23AE0A840071D058 /* StaraParentApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StaraParentApp.entitlements; sourceTree = "<group>"; };
+		B9B8E7FC23AE0A8A0071D058 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9B8E7FD23AE0A8A0071D058 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +89,7 @@
 				B9B8E7E023AE09690071D058 /* StaraParentAppTests */,
 				B9B8E7EB23AE09690071D058 /* StaraParentAppUITests */,
 				B9B8E7C523AE09670071D058 /* Products */,
+				B9B8E7FB23AE0A8A0071D058 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +106,7 @@
 		B9B8E7C623AE09670071D058 /* StaraParentApp */ = {
 			isa = PBXGroup;
 			children = (
+				B9B8E7FA23AE0A840071D058 /* StaraParentApp.entitlements */,
 				B9B8E7C723AE09670071D058 /* AppDelegate.swift */,
 				B9B8E7C923AE09670071D058 /* SceneDelegate.swift */,
 				B9B8E7CB23AE09670071D058 /* ViewController.swift */,
@@ -129,6 +135,14 @@
 				B9B8E7EE23AE09690071D058 /* Info.plist */,
 			);
 			path = StaraParentAppUITests;
+			sourceTree = "<group>";
+		};
+		B9B8E7FB23AE0A8A0071D058 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B9B8E7FC23AE0A8A0071D058 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,6 +452,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StaraParentApp/StaraParentApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A59P6GV5MM;
 				INFOPLIST_FILE = StaraParentApp/Info.plist;
@@ -456,6 +471,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StaraParentApp/StaraParentApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A59P6GV5MM;
 				INFOPLIST_FILE = StaraParentApp/Info.plist;
