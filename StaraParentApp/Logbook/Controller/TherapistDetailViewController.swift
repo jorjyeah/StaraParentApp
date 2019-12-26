@@ -90,5 +90,32 @@ extension TherapistDetailViewController: UITableViewDataSource, UITableViewDeleg
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            performSegue(withIdentifier: "showViewDetailReport", sender: indexPath.row)
+        }
+    }
+    
+    
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//           if segue.identifier == "showViewDetailReport" {
+//               let destination = segue.destination as? ViewDetailReportViewController
+//               let row = sender as! Int
+//               var prompts = String()
+//               detailActivity[row].activityPrompt .forEach { (prompt) in
+//                   prompts.append("\(prompt), ")
+//               }
+//
+//               destination?.activity = detailActivity[row].activityTitle
+//               destination?.howTo = detailActivity[row].activityDesc
+//               destination?.prompt = prompts
+//               print(prompts)
+//               destination?.media = detailActivity[row].activityMedia
+//               destination?.tips  = detailActivity[row].activityTips
+//               destination?.skill = detailActivity[row].skillTitle.recordID
+//               destination?.program = CKRecord.ID(recordName: detailActivity[row].baseProgramTitle)
+//           }
+//       }
     
 }
