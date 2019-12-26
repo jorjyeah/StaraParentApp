@@ -17,7 +17,7 @@ class TherapistDetailViewController: UIViewController {
     let activityArray = ["Stomp Feet", "Bear Hug"]
     let promptArray = ["Gesture", "Verbal"]
     let mediaArray = ["Ground", "-"]
-    let notes = ["Molly was crying while doing the stomp feet "]
+    let notes = ["Molly was crying while doing the stomp feet today. If Molly starts crying again while doing it, plese don't force her to do it."]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +84,7 @@ extension TherapistDetailViewController: UITableViewDataSource, UITableViewDeleg
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath) as!  NotesTableViewCell
-            cell.notesLabel.text =
+            cell.notesLabel.text = notes[indexPath.row]
             
             return  cell
         }
