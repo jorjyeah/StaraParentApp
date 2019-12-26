@@ -106,7 +106,7 @@
                                     <rect key="frame" x="0.0" y="239" width="414" height="216"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZh-fB-Ai7">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attachments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZh-fB-Ai7">
                                             <rect key="frame" x="16" y="8" width="382" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
@@ -233,7 +233,7 @@
                     <navigationItem key="navigationItem" title="Report's Detail" id="av7-YJ-fJn"/>
                     <connections>
                         <outlet property="tableView" destination="fBG-ux-xck" id="og4-Ij-bab"/>
-                        <segue destination="ONO-7Z-rEl" kind="presentation" id="JLC-of-1qM"/>
+                        <segue destination="ONO-7Z-rEl" kind="presentation" identifier="showViewDetailReport" id="JLC-of-1qM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hr-5k-7fF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -305,23 +305,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aBH-13-lLi">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Activity Detail" id="tEW-4y-GVh">
-                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="dAa-wO-VEG"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="je7-yb-RAk">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmQ-ug-LBr">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                        <subviews>
+                                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YbU-dG-7M6">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="c1O-1D-gyF"/>
+                                                </constraints>
+                                                <items>
+                                                    <navigationItem title="Activity Detail" id="eII-ij-7Dh">
+                                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Bmp-Ef-UAI">
+                                                            <connections>
+                                                                <action selector="doneButtonTapped:" destination="ONO-7Z-rEl" id="gfg-I9-KgZ"/>
+                                                            </connections>
+                                                        </barButtonItem>
+                                                    </navigationItem>
+                                                </items>
+                                            </navigationBar>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1f7-x4-V44">
+                                                <rect key="frame" x="16" y="76" width="382" height="41"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="1f7-x4-V44" secondAttribute="trailing" constant="16" id="8Uy-Wm-6Ua"/>
+                                            <constraint firstItem="YbU-dG-7M6" firstAttribute="leading" secondItem="hmQ-ug-LBr" secondAttribute="leading" id="99e-NN-V1K"/>
+                                            <constraint firstItem="1f7-x4-V44" firstAttribute="leading" secondItem="hmQ-ug-LBr" secondAttribute="leading" constant="16" id="9AY-AH-g11"/>
+                                            <constraint firstItem="YbU-dG-7M6" firstAttribute="top" secondItem="hmQ-ug-LBr" secondAttribute="top" id="Pq5-qa-czQ"/>
+                                            <constraint firstItem="1f7-x4-V44" firstAttribute="top" secondItem="YbU-dG-7M6" secondAttribute="bottom" constant="32" id="ofr-jK-wLN"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="hmQ-ug-LBr" firstAttribute="top" secondItem="je7-yb-RAk" secondAttribute="top" id="8DG-JE-UfL"/>
+                                    <constraint firstItem="hmQ-ug-LBr" firstAttribute="width" secondItem="je7-yb-RAk" secondAttribute="width" id="D7h-8X-sis"/>
+                                    <constraint firstAttribute="bottom" secondItem="hmQ-ug-LBr" secondAttribute="bottom" id="RWu-P3-wci"/>
+                                    <constraint firstItem="hmQ-ug-LBr" firstAttribute="leading" secondItem="je7-yb-RAk" secondAttribute="leading" id="Zyf-iP-oFF"/>
+                                    <constraint firstItem="hmQ-ug-LBr" firstAttribute="height" secondItem="je7-yb-RAk" secondAttribute="height" id="geH-rX-SAW"/>
+                                    <constraint firstAttribute="trailing" secondItem="hmQ-ug-LBr" secondAttribute="trailing" id="tA6-zY-TeH"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="je7-yb-RAk" firstAttribute="top" secondItem="CIW-i5-Do2" secondAttribute="top" id="GtP-VG-caa"/>
+                            <constraint firstItem="je7-yb-RAk" firstAttribute="leading" secondItem="CIW-i5-Do2" secondAttribute="leading" id="IMM-EC-34V"/>
+                            <constraint firstItem="CIW-i5-Do2" firstAttribute="bottom" secondItem="je7-yb-RAk" secondAttribute="bottom" id="N9d-w4-cLO"/>
+                            <constraint firstItem="CIW-i5-Do2" firstAttribute="trailing" secondItem="je7-yb-RAk" secondAttribute="trailing" id="wUR-Ur-3s2"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="CIW-i5-Do2"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4v-b3-9Eo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3689.8550724637685" y="1164.5089285714284"/>
+            <point key="canvasLocation" x="3689.8550724637685" y="1163.1696428571429"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.72549019609999998" green="0.51764705879999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
