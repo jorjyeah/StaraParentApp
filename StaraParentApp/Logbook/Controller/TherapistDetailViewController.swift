@@ -7,28 +7,155 @@
 //
 
 import UIKit
+import AVFoundation
+import CloudKit
 
-class TherapistDetailViewController: UIViewController {
+class TherapistDetailViewController: UIViewController, AVAudioPlayerDelegate {
     
 // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView!
     
-    // MARK: - Properties
+// MARK: - IBOutlet UIView
+    @IBOutlet weak var attachmentView: UIView!
+    @IBOutlet weak var audioAttachmentButton: UIButton!
+    @IBOutlet weak var imageAttachment: UIImageView!
+    
+
+// MARK: - Properties
     let activityArray = ["Stomp Feet", "Bear Hug"]
     let promptArray = ["Gesture", "Verbal"]
     let mediaArray = ["Ground", "-"]
     let notes = ["Molly was crying while doing the stomp feet today. If Molly starts crying again while doing it, plese don't force her to do it."]
     
+//    var detailActivity = [DetailedReportCKModel]()
+//    var therapySessionRecordID = CKRecord.ID()
+//    var therapySessionNotes = String()
+//    var therapySessionDate = Date()
+    
+    
+// MARK: - Audio Properties
+    var fileName: String = "audioFile.m4a"
+    var audioData = Data()
+    var audioFilename = URL(string: "")
+    var audioPlayer: AVAudioPlayer!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+//        getActivitySession()
+        
+        audioAttachmentButton.isEnabled = false
+        imageAttachment.isHidden = true
+        
+        let recordingPlay = UIImage(named: "Recordings Play")?.withRenderingMode(.alwaysOriginal)
+        audioAttachmentButton.setImage(recordingPlay, for: .normal)
+        attachmentView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+    }
+    
+    
+// MARK: - Model [George]
+//    func getActivitySession(){
+//        print(therapySessionNotes)
+//        DetailedReportDataManager.getDetailedTherapySession(therapySessionRecordID: therapySessionRecordID) { (activityRecordsID) in
+//            DetailedReportDataManager.getDetailedActivity(activityRecordID: activityRecordsID) { (DetailActivitiesData) in
+//                self.detailActivity = DetailActivitiesData
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            }
+//        }
+//
+//        DetailedReportDataManager.getAudio(therapySessionRecordID: therapySessionRecordID) { (audioNSURL) in
+//            if audioNSURL != nil{
+//                self.setupPlayer(audioNSURL: audioNSURL)
+//                self.audioAttachmentButton.isEnabled = true
+//            }
+//        }
+//
+//        DetailedReportDataManager.getPhoto(therapySessionRecordID: therapySessionRecordID) { (imagePhoto) in
+//            guard let photo = imagePhoto as? UIImage else {
+//                return
+//            }
+//            self.imageAttachment.image = photo
+//            self.imageAttachment.isHidden = false
+//        }
+//    }
+    
+    
+    
+// MARK: - Play and Pause Audio
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func setupPlayer(audioNSURL : NSURL){
+        do {
+            self.audioPlayer = try AVAudioPlayer(contentsOf: audioNSURL as URL)
+            audioPlayer.delegate = self
+            audioPlayer.prepareToPlay()
+            audioPlayer.volume = 1.0
+        } catch let error as NSError {
+            //self.player = nil
+            print(error.localizedDescription)
+        } catch {
+            print("AVAudioPlayer init failed")
+        }
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        let recordingPlay = UIImage(named: "Recordings Play")?.withRenderingMode(.alwaysOriginal)
+        
+        audioAttachmentButton.setTitle("Play", for: .normal)
+        audioAttachmentButton.setImage(recordingPlay, for: .normal)
+    }
+    
+    
+    @IBAction func playAct(_ sender: Any) {
+        let recordingPlay = UIImage(named: "Recordings Play")?.withRenderingMode(.alwaysOriginal)
+        let recordingPause = UIImage(named: "Recordings Pause")?.withRenderingMode(.alwaysOriginal)
+                
+        if audioAttachmentButton.titleLabel?.text == "Play" {
+            audioAttachmentButton.setTitle("Stop", for: .normal)
+            //Ini George yg komen sendiri
+            //            DetailedReportDataManager.getAudio(therapySessionRecordID: therapySessionRecordID) { (audioNSURL) in
+            //                self.setupPlayer(audioNSURL: audioNSURL)
+            self.audioPlayer.play()
+            self.audioAttachmentButton.setImage(recordingPause, for: .normal)
+        } else {
+            audioPlayer.stop()
+            audioAttachmentButton.setTitle("Play", for: .normal)
+                    //playButton.setImage(UIImage(named: "Recordings Play"), for: .normal)
+            audioAttachmentButton.setImage(recordingPlay, for: .normal)
+                
+        }
     }
     
 
 }
 
+
+
+// MARK: - Extension
 extension TherapistDetailViewController: UITableViewDataSource, UITableViewDelegate {
+    
+// MARK: - Section
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let myLabel = UILabel()
+        myLabel.frame = CGRect(x: 20, y: 8, width: 320, height: 20)
+        myLabel.font = UIFont.systemFont(ofSize: 13)
+        myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+        myLabel.textColor = .gray
+
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        headerView.addSubview(myLabel)
+
+        return headerView
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 38
     }
@@ -49,6 +176,7 @@ extension TherapistDetailViewController: UITableViewDataSource, UITableViewDeleg
         }
     }
     
+// MARK: - Cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          if section == 0 {
             return activityArray.count
@@ -97,7 +225,7 @@ extension TherapistDetailViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     
-    
+// MARK: - Prepare for Segue
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //           if segue.identifier == "showViewDetailReport" {
 //               let destination = segue.destination as? ViewDetailReportViewController
