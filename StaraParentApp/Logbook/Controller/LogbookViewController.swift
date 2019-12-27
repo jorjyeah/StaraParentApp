@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class LogbookViewController: UIViewController {
     
@@ -17,19 +18,19 @@ class LogbookViewController: UIViewController {
     
     
     // MARK: - Properties
-    let therapistSession = ["Fri, 18 Oct 2019",  "Wed, 16 Oct 2019", "Mon, 14 Oct 2019", "Fri, 11 Oct 2019"]
-    let parentSession = ["Thu, 17 Oct 2019", "Tue, 15 Oct 2019"]
+//    let therapistSession = ["Fri, 18 Oct 2019",  "Wed, 16 Oct 2019", "Mon, 14 Oct 2019", "Fri, 11 Oct 2019"]
+//    let parentSession = ["Thu, 17 Oct 2019", "Tue, 15 Oct 2019"]
     
     
 //    var studentRecordID = String()
-//    var therapySession = [TherapySessionCKModel]()
-//    var parentsNotesData = [ParentNotesCKModel]()
+    var therapySession = [TherapySessionModel]()
+    var parentsNotes = [ParentNotesModel]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        populateTableView()
+        populateTableView()
 
         // Do any additional setup after loading the view.
     }
@@ -42,26 +43,33 @@ class LogbookViewController: UIViewController {
     
     // MARK: - Model [George]
     
-//     func populateTableView(){
-//            //navigationController?.navigationBar.prefersLargeTitles = false
-//            let therapySessionsData = TherapySessionCKModel.self
-//            therapySessionsData.getTherapySession(studentRecordID: studentRecordID) { therapySessionsData in
-//                self.therapySession = therapySessionsData
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//
-//
-//            DetailedParentNotesDataManager.getParentNotes(studentRecordID: studentRecordID) {
-//                parentsNotesData
-//                in
-//                self.parentsNotesData = parentsNotesData
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//        }
+     func populateTableView(){
+        let reloadGroup = DispatchGroup()
+        
+        reloadGroup.enter()
+        TherapySessionManager.getTherapySession { (arrayOfTherapySession) in
+            self.therapySession = arrayOfTherapySession
+            reloadGroup.leave()
+        }
+        
+        let therapySessionID = therapySession.map{$0.therapySessionRecordID}
+        if therapySessionID.count > 0{
+            reloadGroup.enter()
+            ParentNotesManager.getParentNotes(therapySessionID: therapySessionID) { (arrayOfParentNotes) in
+                self.parentsNotes = arrayOfParentNotes
+                reloadGroup.leave()
+            }
+        } else {
+            reloadGroup.enter()
+            print("No data")
+            reloadGroup.leave()
+        }
+        
+        
+        reloadGroup.notify(queue: .main){
+            self.tableView.reloadData()
+        }
+    }
 //
 //
 //        @IBAction func unwindFromSummary(_ sender:UIStoryboardSegue){
@@ -88,10 +96,10 @@ extension LogbookViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            return parentSession.count
+            return parentsNotes.count
             
         case 1:
-            return therapistSession.count
+            return therapySession.count
             
         default:
             break
@@ -102,17 +110,17 @@ extension LogbookViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "logbookCell", for: indexPath) as! LogbookTableViewCell
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "EEEE, d MMM yyyy, HH:mm a"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, d MMM yyyy, HH:mm a"
 //
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-//            let parentNotesDate = formatter.string(from: parentsNotesData[indexPath.row].parentNoteDay)
-            cell.logbookLabel.text = parentSession[indexPath.row]
+            let parentNotesDate = formatter.string(from: parentsNotes[indexPath.row].parentNoteDay)
+            cell.logbookLabel.text = parentNotesDate
             
         case 1:
-//            let therapySessionDate = formatter.string(from: therapySession[indexPath.row].therapySessionDate)
-            cell.logbookLabel.text = therapistSession[indexPath.row]
+            let therapySessionDate = formatter.string(from: therapySession[indexPath.row].therapySessionDate)
+            cell.logbookLabel.text = therapySessionDate
             
         default:
             break
