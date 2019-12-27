@@ -27,6 +27,9 @@
 		B9B8E7E223AE09690071D058 /* StaraParentAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8E7E123AE09690071D058 /* StaraParentAppTests.swift */; };
 		B9B8E7ED23AE09690071D058 /* StaraParentAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8E7EC23AE09690071D058 /* StaraParentAppUITests.swift */; };
 		B9B8E7FD23AE0A8A0071D058 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B8E7FC23AE0A8A0071D058 /* CloudKit.framework */; };
+		B9D11C4623B4C267001C73ED /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D11C4523B4C267001C73ED /* ProfileModel.swift */; };
+		B9D11C4823B4C42F001C73ED /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D11C4723B4C42F001C73ED /* ProfileManager.swift */; };
+		B9D11C4A23B4D760001C73ED /* StaraUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D11C4923B4D760001C73ED /* StaraUIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +77,9 @@
 		B9B8E7EE23AE09690071D058 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9B8E7FA23AE0A840071D058 /* StaraParentApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StaraParentApp.entitlements; sourceTree = "<group>"; };
 		B9B8E7FC23AE0A8A0071D058 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		B9D11C4523B4C267001C73ED /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		B9D11C4723B4C42F001C73ED /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
+		B9D11C4923B4D760001C73ED /* StaraUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaraUIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,8 @@
 		680B667023B3D3B00093C8AF /* Logbook */ = {
 			isa = PBXGroup;
 			children = (
+				B9D11C3F23B4BE8D001C73ED /* Manager */,
+				B9D11C3E23B4BB47001C73ED /* Model */,
 				680B667423B3D42A0093C8AF /* Controller */,
 				680B667323B3D4210093C8AF /* View */,
 			);
@@ -190,6 +198,7 @@
 		B9B8E7C623AE09670071D058 /* StaraParentApp */ = {
 			isa = PBXGroup;
 			children = (
+				B9D11C4023B4C0F8001C73ED /* Profile */,
 				680B666F23B3D3720093C8AF /* Today */,
 				680B667023B3D3B00093C8AF /* Logbook */,
 				B9B8E7FA23AE0A840071D058 /* StaraParentApp.entitlements */,
@@ -201,6 +210,7 @@
 				B9B8E7D523AE09690071D058 /* LaunchScreen.storyboard */,
 				B9B8E7D823AE09690071D058 /* Info.plist */,
 				B9B8E7D023AE09670071D058 /* StaraParentApp.xcdatamodeld */,
+				B9D11C4923B4D760001C73ED /* StaraUIViewController.swift */,
 			);
 			path = StaraParentApp;
 			sourceTree = "<group>";
@@ -229,6 +239,61 @@
 				B9B8E7FC23AE0A8A0071D058 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B9D11C3E23B4BB47001C73ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B9D11C3F23B4BE8D001C73ED /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		B9D11C4023B4C0F8001C73ED /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B9D11C4423B4C246001C73ED /* View */,
+				B9D11C4323B4C231001C73ED /* Controller */,
+				B9D11C4223B4C229001C73ED /* Manager */,
+				B9D11C4123B4C21E001C73ED /* Model */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		B9D11C4123B4C21E001C73ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B9D11C4523B4C267001C73ED /* ProfileModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B9D11C4223B4C229001C73ED /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B9D11C4723B4C42F001C73ED /* ProfileManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		B9D11C4323B4C231001C73ED /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B9D11C4423B4C246001C73ED /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,13 +432,16 @@
 				B9B8E7CC23AE09670071D058 /* ViewController.swift in Sources */,
 				680B668823B4821C0093C8AF /* ParentsDetailViewController.swift in Sources */,
 				680B668A23B482340093C8AF /* TherapistDetailViewController.swift in Sources */,
+				B9D11C4823B4C42F001C73ED /* ProfileManager.swift in Sources */,
 				B9B8E7D223AE09670071D058 /* StaraParentApp.xcdatamodeld in Sources */,
 				680B667823B3D5000093C8AF /* LogbookViewController.swift in Sources */,
 				680B667623B3D4F10093C8AF /* TodayViewController.swift in Sources */,
 				B9B8E7C823AE09670071D058 /* AppDelegate.swift in Sources */,
 				680B668523B47CE30093C8AF /* LogbookTableViewCell.swift in Sources */,
+				B9D11C4A23B4D760001C73ED /* StaraUIViewController.swift in Sources */,
 				680B668C23B4824E0093C8AF /* ViewDetailViewController.swift in Sources */,
 				B9B8E7CA23AE09670071D058 /* SceneDelegate.swift in Sources */,
+				B9D11C4623B4C267001C73ED /* ProfileModel.swift in Sources */,
 				680B668E23B482CC0093C8AF /* DetailTableViewCell.swift in Sources */,
 				680B669023B482DC0093C8AF /* NotesTableViewCell.swift in Sources */,
 			);
@@ -557,8 +625,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StaraParentApp/StaraParentApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A59P6GV5MM;
 				INFOPLIST_FILE = StaraParentApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -566,6 +635,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jorjyeah.StaraParentApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -576,8 +646,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = StaraParentApp/StaraParentApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A59P6GV5MM;
 				INFOPLIST_FILE = StaraParentApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -585,6 +656,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jorjyeah.StaraParentApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
