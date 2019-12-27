@@ -9,22 +9,34 @@
 import UIKit
 
 class ParentsDetailViewController: UIViewController {
-
+    
+// MARK: - IBOutlet
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var notesLabel: UILabel!
+    
+// MARK: - Properties
+    var parentNote = String()
+    var parentNoteDate = Date()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // MARK: - Styling
+        notesLabel.frame = CGRect(x: 16, y: 137, width: 382, height: 104)
+        notesLabel.backgroundColor = .white
+        notesLabel.layer.cornerRadius = 4
+        notesLabel.layer.borderWidth = 0.3
+        notesLabel.layer.borderColor = UIColor(red: 0.59, green: 0.59, blue: 0.59, alpha: 1).cgColor
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, d MMM yyyy, HH:mm a"
+        
+        dateLabel.text = formatter.string(from: parentNoteDate)
+        notesLabel.text = parentNote
     }
-    */
+   
 
 }
