@@ -27,10 +27,10 @@ class TherapistDetailViewController: UIViewController, AVAudioPlayerDelegate {
     let mediaArray = ["Ground", "-"]
     let notes = ["Molly was crying while doing the stomp feet today. If Molly starts crying again while doing it, plese don't force her to do it."]
     
-//    var detailActivity = [DetailedReportCKModel]()
-//    var therapySessionRecordID = CKRecord.ID()
-//    var therapySessionNotes = String()
-//    var therapySessionDate = Date()
+    var detailActivity = [DetailedReportModel]()
+    var therapySessionRecordID = CKRecord.ID()
+    var therapySessionNotes = String()
+    var therapySessionDate = Date()
     
     
 // MARK: - Audio Properties
@@ -43,7 +43,7 @@ class TherapistDetailViewController: UIViewController, AVAudioPlayerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        getActivitySession()
+        getActivitySession()
         
         audioAttachmentButton.isEnabled = false
         imageAttachment.isHidden = true
@@ -55,32 +55,30 @@ class TherapistDetailViewController: UIViewController, AVAudioPlayerDelegate {
     
     
 // MARK: - Model [George]
-//    func getActivitySession(){
-//        print(therapySessionNotes)
-//        DetailedReportDataManager.getDetailedTherapySession(therapySessionRecordID: therapySessionRecordID) { (activityRecordsID) in
-//            DetailedReportDataManager.getDetailedActivity(activityRecordID: activityRecordsID) { (DetailActivitiesData) in
-//                self.detailActivity = DetailActivitiesData
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//        }
-//
-//        DetailedReportDataManager.getAudio(therapySessionRecordID: therapySessionRecordID) { (audioNSURL) in
-//            if audioNSURL != nil{
-//                self.setupPlayer(audioNSURL: audioNSURL)
-//                self.audioAttachmentButton.isEnabled = true
-//            }
-//        }
-//
-//        DetailedReportDataManager.getPhoto(therapySessionRecordID: therapySessionRecordID) { (imagePhoto) in
-//            guard let photo = imagePhoto as? UIImage else {
-//                return
-//            }
-//            self.imageAttachment.image = photo
-//            self.imageAttachment.isHidden = false
-//        }
-//    }
+    func getActivitySession(){
+        print(therapySessionNotes)
+        DetailedReportDataManager.getDetailedTherapySession(therapySessionRecordID: therapySessionRecordID) { (activityRecordsID) in
+            DetailedReportDataManager.getDetailedActivity(activityRecordID: activityRecordsID) { (DetailActivitiesData) in
+                self.detailActivity = DetailActivitiesData
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+
+        DetailedReportDataManager.getAudio(therapySessionRecordID: therapySessionRecordID) { (audioNSURL) in
+            self.setupPlayer(audioNSURL: audioNSURL)
+            self.audioAttachmentButton.isEnabled = true
+        }
+
+        DetailedReportDataManager.getPhoto(therapySessionRecordID: therapySessionRecordID) { (imagePhoto) in
+            guard let photo = imagePhoto as? UIImage else {
+                return
+            }
+            self.imageAttachment.image = photo
+            self.imageAttachment.isHidden = false
+        }
+    }
     
     
     
@@ -166,10 +164,9 @@ extension TherapistDetailViewController: UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "EEEE, d MMM yyyy"
-//            return "Activities on \(formatter.string(from: therapySessionDate))" // diganti date dari Data
-            return "Activity on Fri, 18 Oct 2019"
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, d MMM yyyy"
+            return "Activities on \(formatter.string(from: therapySessionDate))" // diganti date dari Data
         }
         else {
             return "Notes"
@@ -179,7 +176,7 @@ extension TherapistDetailViewController: UITableViewDataSource, UITableViewDeleg
 // MARK: - Cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          if section == 0 {
-            return activityArray.count
+            return detailActivity.count
         }
         else {
             return 1
@@ -197,22 +194,22 @@ extension TherapistDetailViewController: UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          if indexPath.section == 0 {
-//            var prompts = String()
-//            detailActivity[indexPath.row].activityPrompt .forEach { (prompt) in
-//                prompts.append("\(prompt), ")
-//            }
+            var prompts = String()
+            detailActivity[indexPath.row].activityPrompt .forEach { (prompt) in
+                prompts.append("\(prompt), ")
+            }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailTableViewCell
             
-            cell.activityLabel.text = activityArray[indexPath.row]
-            cell.promptLabel.text = "Prompt: " + promptArray[indexPath.row]
-            cell.mediaLabel.text = "Media: " + mediaArray[indexPath.row]
+            cell.activityLabel.text = detailActivity[indexPath.row].activityTitle
+            cell.promptLabel.text = "Prompt: " + prompts
+            cell.mediaLabel.text = "Media: " + detailActivity[indexPath.row].activityMedia
                    
             return  cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath) as!  NotesTableViewCell
-            cell.notesLabel.text = notes[indexPath.row]
+            cell.notesLabel.text = therapySessionNotes
             
             return  cell
         }
@@ -226,24 +223,24 @@ extension TherapistDetailViewController: UITableViewDataSource, UITableViewDeleg
     
     
 // MARK: - Prepare for Segue
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//           if segue.identifier == "showViewDetailReport" {
-//               let destination = segue.destination as? ViewDetailReportViewController
-//               let row = sender as! Int
-//               var prompts = String()
-//               detailActivity[row].activityPrompt .forEach { (prompt) in
-//                   prompts.append("\(prompt), ")
-//               }
-//
-//               destination?.activity = detailActivity[row].activityTitle
-//               destination?.howTo = detailActivity[row].activityDesc
-//               destination?.prompt = prompts
-//               print(prompts)
-//               destination?.media = detailActivity[row].activityMedia
-//               destination?.tips  = detailActivity[row].activityTips
-//               destination?.skill = detailActivity[row].skillTitle.recordID
-//               destination?.program = CKRecord.ID(recordName: detailActivity[row].baseProgramTitle)
-//           }
-//       }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       if segue.identifier == "showViewDetailReport" {
+           let destination = segue.destination as? ViewDetailViewController
+           let row = sender as! Int
+           var prompts = String()
+           detailActivity[row].activityPrompt .forEach { (prompt) in
+               prompts.append("\(prompt), ")
+           }
+
+           destination?.activity = detailActivity[row].activityTitle
+           destination?.howTo = detailActivity[row].activityDesc
+           destination?.prompt = prompts
+           print(prompts)
+           destination?.media = detailActivity[row].activityMedia
+           destination?.tips  = detailActivity[row].activityTips
+           destination?.skill = detailActivity[row].skillTitle.recordID
+           destination?.program = CKRecord.ID(recordName: detailActivity[row].baseProgramTitle)
+       }
+   }
     
 }

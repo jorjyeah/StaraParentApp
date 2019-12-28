@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let preloadedDataKey = "didPreloadData"
+        let userIDUserDef = "userID"
+        let parentNameUserDef = "parentName"
+        let userDefaults = UserDefaults.standard
+        
+        //tabbar styling
+        UITabBar.appearance().tintColor = UIColor(red: 0.73, green: 0.52, blue: 0, alpha: 1)
+        UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
+
+        if userDefaults.bool(forKey: preloadedDataKey) == false {
+            // check if it's the firsttime user open the app
+            preloadData { (userRef, parentName) in
+                // setUserDefaults
+                userDefaults.set(parentName, forKey: parentNameUserDef)
+                userDefaults.set(userRef, forKey: userIDUserDef)
+                ProfileManager.checkProfileData(userRef: userRef) { (dataAvailability) in
+                    // check data availability about therapist
+                    if !dataAvailability{
+                        print("no data parent, appDelegate")
+                        ProfileManager.addNewProfile(parentName: parentName, userReference: userRef){
+                            (newTherapistSaved) in
+                            print(newTherapistSaved)
+                        }
+                        // create new one data therapist if it's not available
+                        print("userID set at userDefaults")
+                    } else{
+                        print("data available therapist, appDelegate")
+                    }
+                    print("userID & parentName : \(userDefaults.string(forKey: userIDUserDef)) & \(userDefaults.string(forKey: parentNameUserDef))")
+                    userDefaults.set(true, forKey: preloadedDataKey)
+                    NotificationCenter.default.post(name: NSNotification.Name("preloadDataDone"), object: nil)
+                     // dont forget to set true
+                }
+            }
+        }
         return true
     }
 
@@ -34,6 +70,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Core Data stack
+    
+    private func preloadData(onComplete: @escaping(String,String) -> ()){
+        print("masuk")
+        var parentName : String = ""
+        var userRef : String = ""
+        
+        let container = CKContainer(identifier: "iCloud.com.jorjyeah.FinalChallengeAppNew")
+        
+        container.requestApplicationPermission(.userDiscoverability) { (status, error) in
+            container.fetchUserRecordID { (record, error) in
+                guard let record = record else {return}
+                container.discoverUserIdentity(withUserRecordID: record) { (userID, error) in
+                    if let userID = userID {
+                        userRef = "\(userID.userRecordID?.recordName ?? "")"
+                        parentName = "\(userID.nameComponents?.givenName ?? "") \(userID.nameComponents?.familyName ?? "")"
+                        print(parentName, userRef)
+                        onComplete(userRef,parentName)
+                    }
+                }
+            }
+        }
+    }
 
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         /*
