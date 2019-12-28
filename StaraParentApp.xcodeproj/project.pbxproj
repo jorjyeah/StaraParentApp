@@ -21,6 +21,9 @@
 		B931FF0523B5FF02003F2B9E /* ParentNotesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B931FF0423B5FF02003F2B9E /* ParentNotesManager.swift */; };
 		B931FF0723B602D3003F2B9E /* TherapySessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B931FF0623B602D3003F2B9E /* TherapySessionModel.swift */; };
 		B931FF0923B60323003F2B9E /* TherapySessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B931FF0823B60323003F2B9E /* TherapySessionManager.swift */; };
+		B931FF0B23B75C19003F2B9E /* DetailedReportDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B931FF0A23B75C19003F2B9E /* DetailedReportDataManager.swift */; };
+		B931FF0D23B75C93003F2B9E /* DetailedReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B931FF0C23B75C93003F2B9E /* DetailedReportModel.swift */; };
+		B931FF0F23B7662E003F2B9E /* ReadableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B931FF0E23B7662E003F2B9E /* ReadableData.swift */; };
 		B9B8E7C823AE09670071D058 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8E7C723AE09670071D058 /* AppDelegate.swift */; };
 		B9B8E7CA23AE09670071D058 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8E7C923AE09670071D058 /* SceneDelegate.swift */; };
 		B9B8E7CC23AE09670071D058 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B8E7CB23AE09670071D058 /* ViewController.swift */; };
@@ -68,6 +71,9 @@
 		B931FF0423B5FF02003F2B9E /* ParentNotesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentNotesManager.swift; sourceTree = "<group>"; };
 		B931FF0623B602D3003F2B9E /* TherapySessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TherapySessionModel.swift; sourceTree = "<group>"; };
 		B931FF0823B60323003F2B9E /* TherapySessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TherapySessionManager.swift; sourceTree = "<group>"; };
+		B931FF0A23B75C19003F2B9E /* DetailedReportDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedReportDataManager.swift; sourceTree = "<group>"; };
+		B931FF0C23B75C93003F2B9E /* DetailedReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedReportModel.swift; sourceTree = "<group>"; };
+		B931FF0E23B7662E003F2B9E /* ReadableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableData.swift; sourceTree = "<group>"; };
 		B9B8E7C423AE09670071D058 /* StaraParentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StaraParentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B8E7C723AE09670071D058 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9B8E7C923AE09670071D058 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -254,6 +260,7 @@
 			children = (
 				B931FF0223B5FCB5003F2B9E /* ParentNotesModel.swift */,
 				B931FF0623B602D3003F2B9E /* TherapySessionModel.swift */,
+				B931FF0C23B75C93003F2B9E /* DetailedReportModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -263,6 +270,8 @@
 			children = (
 				B931FF0423B5FF02003F2B9E /* ParentNotesManager.swift */,
 				B931FF0823B60323003F2B9E /* TherapySessionManager.swift */,
+				B931FF0A23B75C19003F2B9E /* DetailedReportDataManager.swift */,
+				B931FF0E23B7662E003F2B9E /* ReadableData.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -442,12 +451,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B931FF0523B5FF02003F2B9E /* ParentNotesManager.swift in Sources */,
+				B931FF0D23B75C93003F2B9E /* DetailedReportModel.swift in Sources */,
 				B9B8E7CC23AE09670071D058 /* ViewController.swift in Sources */,
 				680B668823B4821C0093C8AF /* ParentsDetailViewController.swift in Sources */,
 				680B668A23B482340093C8AF /* TherapistDetailViewController.swift in Sources */,
 				B9D11C4823B4C42F001C73ED /* ProfileManager.swift in Sources */,
 				B9B8E7D223AE09670071D058 /* StaraParentApp.xcdatamodeld in Sources */,
 				B931FF0323B5FCB5003F2B9E /* ParentNotesModel.swift in Sources */,
+				B931FF0B23B75C19003F2B9E /* DetailedReportDataManager.swift in Sources */,
 				680B667823B3D5000093C8AF /* LogbookViewController.swift in Sources */,
 				680B667623B3D4F10093C8AF /* TodayViewController.swift in Sources */,
 				B9B8E7C823AE09670071D058 /* AppDelegate.swift in Sources */,
@@ -460,6 +471,7 @@
 				680B668E23B482CC0093C8AF /* DetailTableViewCell.swift in Sources */,
 				B931FF0723B602D3003F2B9E /* TherapySessionModel.swift in Sources */,
 				680B669023B482DC0093C8AF /* NotesTableViewCell.swift in Sources */,
+				B931FF0F23B7662E003F2B9E /* ReadableData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

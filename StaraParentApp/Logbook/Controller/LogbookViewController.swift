@@ -25,13 +25,13 @@ class LogbookViewController: UIViewController {
 //    var studentRecordID = String()
     var therapySession = [TherapySessionModel]()
     var parentsNotes = [ParentNotesModel]()
-    
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(populateTableView), for: .valueChanged)
         populateTableView()
-
         // Do any additional setup after loading the view.
     }
     
@@ -43,31 +43,48 @@ class LogbookViewController: UIViewController {
     
     // MARK: - Model [George]
     
-     func populateTableView(){
+    @objc func populateTableView(){
         let reloadGroup = DispatchGroup()
         
         reloadGroup.enter()
         TherapySessionManager.getTherapySession { (arrayOfTherapySession) in
             self.therapySession = arrayOfTherapySession
-            reloadGroup.leave()
-        }
-        
-        let therapySessionID = therapySession.map{$0.therapySessionRecordID}
-        if therapySessionID.count > 0{
-            reloadGroup.enter()
-            ParentNotesManager.getParentNotes(therapySessionID: therapySessionID) { (arrayOfParentNotes) in
-                self.parentsNotes = arrayOfParentNotes
-                reloadGroup.leave()
+            let therapySessionID = self.therapySession.map{$0.therapySessionRecordID}
+            if therapySessionID.count > 0{
+                reloadGroup.enter()
+                ParentNotesManager.getParentNotes(therapySessionID: therapySessionID) { (arrayOfParentNotes) in
+                    self.parentsNotes = arrayOfParentNotes
+                    reloadGroup.leave()
+                }
+            } else {
+                print("No data")
             }
-        } else {
-            reloadGroup.enter()
-            print("No data")
             reloadGroup.leave()
         }
-        
         
         reloadGroup.notify(queue: .main){
             self.tableView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+        
+        
+    }
+    
+    func emptyState(){
+        let footer = UIView()
+        let emptyStateImage = UIImageView()
+        emptyStateImage.image = UIImage(named: "Search not found")
+        emptyStateImage.frame = CGRect(x: 0, y: 0, width: 296, height: 284)
+        footer.addSubview(emptyStateImage)
+
+        emptyStateImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            emptyStateImage.centerXAnchor.constraint(equalTo: footer.centerXAnchor),
+            emptyStateImage.topAnchor.constraint(equalTo: footer.topAnchor, constant: 8)
+        ])
+        
+        DispatchQueue.main.async {
+            self.tableView.tableFooterView = footer
         }
     }
 //
@@ -96,8 +113,10 @@ extension LogbookViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
+//            if parentsNotes.count == 0 {
+//                emptyState()
+//            }
             return parentsNotes.count
-            
         case 1:
             return therapySession.count
             
@@ -121,7 +140,6 @@ extension LogbookViewController: UITableViewDataSource, UITableViewDelegate {
         case 1:
             let therapySessionDate = formatter.string(from: therapySession[indexPath.row].therapySessionDate)
             cell.logbookLabel.text = therapySessionDate
-            
         default:
             break
         }
@@ -141,25 +159,21 @@ extension LogbookViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     
-    // MARK: - Model [George]
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//           if segue.identifier == "showAddReport" {
-//               let destination = segue.destination as! AddReportViewController
-//               destination.studentRecordID = studentRecordID
-//               print("\(destination.studentRecordID)")
-//           } else if segue.identifier == "showTherapistDetail" {
-//               let destination = segue.destination as? DetailTherapistReportViewController
-//               let row = sender as! Int
-//               destination?.therapySessionRecordID = therapySession[row].therapySessionRecordID
-//               destination?.therapySessionNotes = therapySession[row].therapySessionNotes
-//               destination?.therapySessionDate = therapySession[row].therapySessionDate
-//           } else if segue.identifier == "showParentsDetail" {
-//               let destination = segue.destination as? ParentsDetailViewController
-//               let row = sender as! Int
-//               destination?.parentNote = parentsNotesData[row].parentNoteContent
-//               destination?.parentNoteDate = parentsNotesData[row].parentNoteDay
-//           }
-//       }
+    // MARK: - Segue [George]
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showTherapistDetail" {
+            let destination = segue.destination as? TherapistDetailViewController
+            let row = sender as! Int
+            destination?.therapySessionRecordID = therapySession[row].therapySessionRecordID
+            destination?.therapySessionNotes = therapySession[row].therapySessionNotes
+            destination?.therapySessionDate = therapySession[row].therapySessionDate
+       } else if segue.identifier == "showParentsDetail" {
+           let destination = segue.destination as? ParentsDetailViewController
+           let row = sender as! Int
+           destination?.parentNote = parentsNotes[row].parentNoteContent
+           destination?.parentNoteDate = parentsNotes[row].parentNoteDay
+       }
+   }
     
     
 }
