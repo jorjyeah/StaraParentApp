@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class ViewDetailViewController: UIViewController {
     
@@ -27,8 +28,8 @@ class ViewDetailViewController: UIViewController {
     var howTo:String?
     var example:String?
     var tips:String?
-//    var skill:CKRecord.ID?
-//    var program:CKRecord.ID?
+    var skill:CKRecord.ID?
+    var program:CKRecord.ID?
     var image:String?
     var audio:String?
     
@@ -43,12 +44,12 @@ class ViewDetailViewController: UIViewController {
             self.promptLabel.text = self.prompt
             self.mediaLabel.text = self.media
             self.helpfulTipsLabel.text = self.tips
-//            ReadableData.translateSkill(skillRecordID: self.skill!) { (readableSkill) in
-//                self.skillLabel.text = readableSkill
-//            }
-//            ReadableData.translateBaseProgram(baseProgramRecordID: self.program!) { (readableBaseProgram) in
-//                self.programLabel.text = readableBaseProgram
-//            }
+            ReadableData.translateSkill(skillRecordID: self.skill!) { (readableSkill) in
+                self.skillLabel.text = readableSkill
+            }
+            ReadableData.translateBaseProgram(baseProgramRecordID: self.program!) { (readableBaseProgram) in
+                self.programLabel.text = readableBaseProgram
+            }
         }
 
     }
