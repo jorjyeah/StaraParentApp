@@ -168,10 +168,28 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="C0Z-tk-WZ3" kind="presentation" identifier="showViewDetail" id="yGo-eP-tic"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KUY-qq-50X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="281.15942028985512" y="849.77678571428567"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Hut-Gz-JGi">
+            <objects>
+                <viewController id="C0Z-tk-WZ3" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sgC-Ss-45U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="hn1-si-H0U"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pcE-wo-y6p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1384" y="1281"/>
         </scene>
         <!--Student Profile View Controller-->
         <scene sceneID="C4x-pW-huw">
@@ -187,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRc-PB-e5a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1183" y="850"/>
+            <point key="canvasLocation" x="1381" y="481"/>
         </scene>
         <!--Item-->
         <scene sceneID="Pqk-t1-LiV">
