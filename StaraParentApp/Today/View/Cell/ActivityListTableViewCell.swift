@@ -10,6 +10,11 @@ import UIKit
 
 class ActivityListTableViewCell: UITableViewCell {
 
+    // MARK: - IBOutlets
+    @IBOutlet weak var activityLabel: UILabel!
+    @IBOutlet weak var promptLabel: UILabel!
+    @IBOutlet weak var mediaLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -8,8 +8,11 @@
 
 import UIKit
 
-class NotesTableViewCell: UITableViewCell {
-
+class NotesListTableViewCell: UITableViewCell {
+    
+    // MARK: - IBOutlets
+    @IBOutlet weak var notesLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
