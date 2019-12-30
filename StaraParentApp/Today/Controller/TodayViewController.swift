@@ -25,11 +25,8 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var submitButton: UIButton!
     
     // MARK: - Properties
-//    let activityListArray = ["Stomp Feet", "Bear Hug"]
-//    let promptListArray = ["Visual", "Gesture"]
-//    let mediaListArray = ["Ground", "-"]
-//    let notesArray = ["Molly was doing good on Stomp Feet activity today, but still need guidance on doing it. If Molly starts crying while doing the Stompt Feet activity please give her a Bear Hug. Good job Molly, see you on Wednesday :)"]
     
+    var parentNotes : String?
     var therapySession = [TherapySessionModel]()
     var detailActivity = [DetailedReportModel]()
     var therapyNotes = String()
@@ -50,6 +47,24 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
         let recordingPlay = UIImage(named: "Recordings Play")?.withRenderingMode(.alwaysOriginal)
         audioAttachmentButton.setImage(recordingPlay, for: .normal)
         
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+
+        view.addGestureRecognizer(tap)
+        
+        feedbackTextView.text = "Write your notes about today's activity"
+        feedbackTextView.textColor = UIColor.lightGray
+//        feedbackTextView.becomeFirstResponder()
+        feedbackTextView.delegate = self // agar fungsi check changed dan placeholdernya nyala, harus di delegasikan ke UIVC
+        feedbackTextView.selectedTextRange = feedbackTextView.textRange(from: feedbackTextView.beginningOfDocument, to: feedbackTextView.beginningOfDocument)
+    }
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     func getActivitySession(){
@@ -148,7 +163,10 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
     @IBAction func submitButtonTapped(_ sender: Any) {
         //disini ga perform segue
         //ambil value dari textview dulu
-        //nanti dia send value ke parents report
+        if parentNotes != nil {
+            //nanti dia send value ke parents report
+        }
+        
         //jadi nanti number of row in section untuk notes nya nambah datanya
         //setelahnya textviewnya kosong
         
@@ -158,7 +176,7 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
 }
 
 // MARK: - Delegate and Data Source
-extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
+extension TodayViewController: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
     
 // MARK: - Section
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -225,6 +243,63 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    // untuk get notesnya
+    func textViewDidChange(_ textView: UITextView) {
+        self.parentNotes = textView.text
+        print(parentNotes)
+    }
+    
+    // untuk placeholdernya
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray && textView.text != nil{
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+
+        // Combine the textView text and the replacement text to
+        // create the updated text string
+        let currentText:String = textView.text
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
+
+        // If updated text view will be empty, add the placeholder
+        // and set the cursor to the beginning of the text view
+        if updatedText.isEmpty {
+            textView.text = "Let the therapist know what's in your thought"
+            textView.textColor = UIColor.lightGray
+
+            textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
+        }
+
+        // Else if the text view's placeholder is showing and the
+        // length of the replacement string is greater than 0, set
+        // the text color to black then set its text to the
+        // replacement string
+         else if textView.textColor == UIColor.lightGray && !text.isEmpty {
+            textView.textColor = UIColor.black
+            textView.text = text
+        }
+
+        // For every other case, the text should change with the usual
+        // behavior...
+        else {
+            return true
+        }
+
+        // ...otherwise return false since the updates have already
+        // been made
+        return false
+    }
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if self.view.window != nil {
+            if textView.textColor == UIColor.lightGray {
+                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
+            }
+        }
+    }
     
 // MARK: - Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

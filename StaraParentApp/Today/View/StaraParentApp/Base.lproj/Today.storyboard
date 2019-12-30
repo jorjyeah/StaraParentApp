@@ -66,7 +66,7 @@
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Let the therapist know what's in your thought" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tY0-IC-gqG">
                                             <rect key="frame" x="16" y="275" width="382" height="88"/>
-                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="382" id="0lk-iW-IA4"/>
                                                 <constraint firstAttribute="height" constant="88" id="lfe-FR-Wl4"/>
