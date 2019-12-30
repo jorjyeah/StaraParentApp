@@ -22,7 +22,7 @@
 		680B669B23B7D4330093C8AF /* AddInstitutionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B669A23B7D4330093C8AF /* AddInstitutionTableViewCell.swift */; };
 		680B669D23B7DACA0093C8AF /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B669C23B7DACA0093C8AF /* AddProfileViewController.swift */; };
 		680B669F23B7DAD80093C8AF /* AddTherapistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B669E23B7DAD80093C8AF /* AddTherapistViewController.swift */; };
-		680B66A123B888C70093C8AF /* ActivcityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A023B888C70093C8AF /* ActivcityDetailViewController.swift */; };
+		680B66A123B888C70093C8AF /* ActivicityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A023B888C70093C8AF /* ActivicityDetailViewController.swift */; };
 		680B66A323B88A2C0093C8AF /* ActivityListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A223B88A2C0093C8AF /* ActivityListTableViewCell.swift */; };
 		680B66A523B88A3E0093C8AF /* NotesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A423B88A3E0093C8AF /* NotesListTableViewCell.swift */; };
 		680B66A723B8904E0093C8AF /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A623B8904E0093C8AF /* TodayViewController.swift */; };
@@ -81,7 +81,7 @@
 		680B669A23B7D4330093C8AF /* AddInstitutionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInstitutionTableViewCell.swift; sourceTree = "<group>"; };
 		680B669C23B7DACA0093C8AF /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		680B669E23B7DAD80093C8AF /* AddTherapistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTherapistViewController.swift; sourceTree = "<group>"; };
-		680B66A023B888C70093C8AF /* ActivcityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivcityDetailViewController.swift; sourceTree = "<group>"; };
+		680B66A023B888C70093C8AF /* ActivicityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivicityDetailViewController.swift; sourceTree = "<group>"; };
 		680B66A223B88A2C0093C8AF /* ActivityListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListTableViewCell.swift; sourceTree = "<group>"; };
 		680B66A423B88A3E0093C8AF /* NotesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListTableViewCell.swift; sourceTree = "<group>"; };
 		680B66A623B8904E0093C8AF /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 				680B669423B7CE440093C8AF /* SelectProfileViewController.swift */,
 				680B669C23B7DACA0093C8AF /* AddProfileViewController.swift */,
 				680B669E23B7DAD80093C8AF /* AddTherapistViewController.swift */,
-				680B66A023B888C70093C8AF /* ActivcityDetailViewController.swift */,
+				680B66A023B888C70093C8AF /* ActivicityDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -485,7 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				680B66A123B888C70093C8AF /* ActivcityDetailViewController.swift in Sources */,
+				680B66A123B888C70093C8AF /* ActivicityDetailViewController.swift in Sources */,
 				B931FF0523B5FF02003F2B9E /* ParentNotesManager.swift in Sources */,
 				680B669523B7CE440093C8AF /* SelectProfileViewController.swift in Sources */,
 				680B669B23B7D4330093C8AF /* AddInstitutionTableViewCell.swift in Sources */,
