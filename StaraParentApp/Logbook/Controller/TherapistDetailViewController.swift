@@ -135,7 +135,7 @@ class TherapistDetailViewController: UIViewController, AVAudioPlayerDelegate {
 
 
 
-// MARK: - Extension
+// MARK: - Delegate and Data Source
 extension TherapistDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
 // MARK: - Section
