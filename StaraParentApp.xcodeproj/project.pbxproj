@@ -22,7 +22,7 @@
 		680B669B23B7D4330093C8AF /* AddInstitutionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B669A23B7D4330093C8AF /* AddInstitutionTableViewCell.swift */; };
 		680B669D23B7DACA0093C8AF /* AddProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B669C23B7DACA0093C8AF /* AddProfileViewController.swift */; };
 		680B669F23B7DAD80093C8AF /* AddTherapistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B669E23B7DAD80093C8AF /* AddTherapistViewController.swift */; };
-		680B66A123B888C70093C8AF /* ActivcityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A023B888C70093C8AF /* ActivcityDetailViewController.swift */; };
+		680B66A123B888C70093C8AF /* ActivicityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A023B888C70093C8AF /* ActivicityDetailViewController.swift */; };
 		680B66A323B88A2C0093C8AF /* ActivityListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A223B88A2C0093C8AF /* ActivityListTableViewCell.swift */; };
 		680B66A523B88A3E0093C8AF /* NotesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A423B88A3E0093C8AF /* NotesListTableViewCell.swift */; };
 		680B66A723B8904E0093C8AF /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A623B8904E0093C8AF /* TodayViewController.swift */; };
@@ -81,7 +81,7 @@
 		680B669A23B7D4330093C8AF /* AddInstitutionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInstitutionTableViewCell.swift; sourceTree = "<group>"; };
 		680B669C23B7DACA0093C8AF /* AddProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileViewController.swift; sourceTree = "<group>"; };
 		680B669E23B7DAD80093C8AF /* AddTherapistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTherapistViewController.swift; sourceTree = "<group>"; };
-		680B66A023B888C70093C8AF /* ActivcityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivcityDetailViewController.swift; sourceTree = "<group>"; };
+		680B66A023B888C70093C8AF /* ActivicityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivicityDetailViewController.swift; sourceTree = "<group>"; };
 		680B66A223B88A2C0093C8AF /* ActivityListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListTableViewCell.swift; sourceTree = "<group>"; };
 		680B66A423B88A3E0093C8AF /* NotesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListTableViewCell.swift; sourceTree = "<group>"; };
 		680B66A623B8904E0093C8AF /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 		B931FF0A23B75C19003F2B9E /* DetailedReportDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedReportDataManager.swift; sourceTree = "<group>"; };
 		B931FF0C23B75C93003F2B9E /* DetailedReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedReportModel.swift; sourceTree = "<group>"; };
 		B931FF0E23B7662E003F2B9E /* ReadableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableData.swift; sourceTree = "<group>"; };
-		B9B8E7C423AE09670071D058 /* StaraParentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StaraParentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9B8E7C423AE09670071D058 /* STARA Parent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "STARA Parent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B8E7C723AE09670071D058 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9B8E7C923AE09670071D058 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B9B8E7CB23AE09670071D058 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 				680B669423B7CE440093C8AF /* SelectProfileViewController.swift */,
 				680B669C23B7DACA0093C8AF /* AddProfileViewController.swift */,
 				680B669E23B7DAD80093C8AF /* AddTherapistViewController.swift */,
-				680B66A023B888C70093C8AF /* ActivcityDetailViewController.swift */,
+				680B66A023B888C70093C8AF /* ActivicityDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -237,7 +237,7 @@
 		B9B8E7C523AE09670071D058 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B9B8E7C423AE09670071D058 /* StaraParentApp.app */,
+				B9B8E7C423AE09670071D058 /* STARA Parent.app */,
 				B9B8E7DD23AE09690071D058 /* StaraParentAppTests.xctest */,
 				B9B8E7E823AE09690071D058 /* StaraParentAppUITests.xctest */,
 			);
@@ -369,7 +369,7 @@
 			);
 			name = StaraParentApp;
 			productName = StaraParentApp;
-			productReference = B9B8E7C423AE09670071D058 /* StaraParentApp.app */;
+			productReference = B9B8E7C423AE09670071D058 /* STARA Parent.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B9B8E7DC23AE09690071D058 /* StaraParentAppTests */ = {
@@ -485,7 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				680B66A123B888C70093C8AF /* ActivcityDetailViewController.swift in Sources */,
+				680B66A123B888C70093C8AF /* ActivicityDetailViewController.swift in Sources */,
 				B931FF0523B5FF02003F2B9E /* ParentNotesManager.swift in Sources */,
 				680B669523B7CE440093C8AF /* SelectProfileViewController.swift in Sources */,
 				680B669B23B7D4330093C8AF /* AddInstitutionTableViewCell.swift in Sources */,
@@ -706,7 +706,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jorjyeah.StaraParentApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "STARA Parent";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -727,7 +727,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jorjyeah.StaraParentApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "STARA Parent";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import CloudKit
 
 class TodayViewController: UIViewController, AVAudioPlayerDelegate {
     
@@ -24,21 +25,25 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var submitButton: UIButton!
     
     // MARK: - Properties
-    let activityListArray = ["Stomp Feet", "Bear Hug"]
-    let promptListArray = ["Visual", "Gesture"]
-    let mediaListArray = ["Ground", "-"]
-    let notesArray = ["Molly was doing good on Stomp Feet activity today, but still need guidance on doing it. If Molly starts crying while doing the Stompt Feet activity please give her a Bear Hug. Good job Molly, see you on Wednesday :)"]
+//    let activityListArray = ["Stomp Feet", "Bear Hug"]
+//    let promptListArray = ["Visual", "Gesture"]
+//    let mediaListArray = ["Ground", "-"]
+//    let notesArray = ["Molly was doing good on Stomp Feet activity today, but still need guidance on doing it. If Molly starts crying while doing the Stompt Feet activity please give her a Bear Hug. Good job Molly, see you on Wednesday :)"]
     
-    
+    var therapySession = [TherapySessionModel]()
+    var detailActivity = [DetailedReportModel]()
+    var therapyNotes = String()
+    var therapyRecordID = CKRecord.ID()
     var fileName: String = "audioFile.m4a"
     var audioData = Data()
     var audioFilename = URL(string: "")
     var audioPlayer: AVAudioPlayer!
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getActivitySession()
+        
         audioAttachmentButton.isEnabled = false
         imageAttachmentImageView.isHidden = true
         
@@ -47,32 +52,48 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
         
     }
     
-//    func getActivitySession(){
-//        print(therapySessionNotes)
-//        DetailedReportDataManager.getDetailedTherapySession(therapySessionRecordID: therapySessionRecordID) { (activityRecordsID) in
-//            DetailedReportDataManager.getDetailedActivity(activityRecordID: activityRecordsID) { (DetailActivitiesData) in
-//                self.detailActivity = DetailActivitiesData
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//        }
-//
-//        DetailedReportDataManager.getAudio(therapySessionRecordID: therapySessionRecordID) { (audioNSURL) in
-//            if audioNSURL != nil{
-//                self.setupPlayer(audioNSURL: audioNSURL)
-//                self.audioAttachmentButton.isEnabled = true
-//            }
-//        }
-//
-//        DetailedReportDataManager.getPhoto(therapySessionRecordID: therapySessionRecordID) { (imagePhoto) in
-//            guard let photo = imagePhoto as? UIImage else {
-//                return
-//            }
-//            self.imageAttachment.image = photo
-//            self.imageAttachment.isHidden = false
-//        }
-//    }
+    func getActivitySession(){
+        let reloadGroup = DispatchGroup()
+        
+        reloadGroup.enter()
+        TherapySessionManager.getTherapySession { (arrayOfTherapySession) in
+            self.therapySession = arrayOfTherapySession
+            self.therapyNotes = arrayOfTherapySession[0].therapySessionNotes
+            self.therapyRecordID = arrayOfTherapySession[0].therapySessionRecordID
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, d MMM yyyy"
+            DispatchQueue.main.async {
+                self.todayDateLabel.text = "Activities on \(formatter.string(from: arrayOfTherapySession[0].therapySessionDate))" // diganti date dari Data
+            }
+            
+            reloadGroup.leave()
+        }
+        
+        
+        reloadGroup.notify(queue: .main){
+            DetailedReportDataManager.getDetailedTherapySession(therapySessionRecordID: self.therapyRecordID) { (activityRecordsID) in
+                DetailedReportDataManager.getDetailedActivity(activityRecordID: activityRecordsID) { (DetailActivitiesData) in
+                    self.detailActivity = DetailActivitiesData
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+
+            DetailedReportDataManager.getAudio(therapySessionRecordID: self.therapyRecordID) { (audioNSURL) in
+                self.setupPlayer(audioNSURL: audioNSURL)
+                self.audioAttachmentButton.isEnabled = true
+            }
+
+            DetailedReportDataManager.getPhoto(therapySessionRecordID: self.therapyRecordID) { (imagePhoto) in
+                guard let photo = imagePhoto as? UIImage else {
+                    return
+                }
+                self.imageAttachmentImageView.image = photo
+                self.imageAttachmentImageView.isHidden = false
+            }
+        }
+    }
     
 // MARK: - Play and Pause Audio
     func getDocumentsDirectory() -> URL {
@@ -165,7 +186,7 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return activityListArray.count
+            return detailActivity.count
         } else {
             return 1
         }
@@ -174,38 +195,57 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             
-//            var prompts = String()
-//            detailActivity[indexPath.row].activityPrompt .forEach { (prompt) in
-//                prompts.append("\(prompt), ")
-//            }
+            var prompts = String()
+            detailActivity[indexPath.row].activityPrompt .forEach { (prompt) in
+                prompts.append("\(prompt), ")
+            }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityListCell", for: indexPath) as! ActivityListTableViewCell
             
-            cell.activityLabel.text = activityListArray[indexPath.row]
-            cell.promptLabel.text = "Prompt: " + promptListArray[indexPath.row]
-            cell.mediaLabel.text = "Media: " + mediaListArray[indexPath.row]
-        
+            cell.activityLabel.text = detailActivity[indexPath.row].activityTitle
+            cell.promptLabel.text = "Prompt: " + prompts
+            cell.mediaLabel.text = "Media: " + detailActivity[indexPath.row].activityMedia
             return  cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "notesListCell", for: indexPath) as!  NotesListTableViewCell
+            if therapyNotes == ""{
+                cell.notesLabel.text = "There's no note from the therapist"
+            } else {
+                cell.notesLabel.text = therapyNotes
+            }
             
-            cell.notesLabel.text = notesArray[indexPath.row]
             return  cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            performSegue(withIdentifier: "showActivityDetail", sender: self)
+            performSegue(withIdentifier: "showActivityDetail", sender: indexPath.row)
         }
     }
     
     
 // MARK: - Prepare for Segue
-//     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showActivityDetail" {
+            let destination = segue.destination as? ActivicityDetailViewController
+            let row = sender as! Int
+            var prompts = String()
+            detailActivity[row].activityPrompt .forEach { (prompt) in
+                prompts.append("\(prompt), ")
+            }
+
+            destination?.activity = detailActivity[row].activityTitle
+            destination?.howTo = detailActivity[row].activityDesc
+            destination?.prompt = prompts
+            print(prompts)
+            destination?.media = detailActivity[row].activityMedia
+            destination?.tips  = detailActivity[row].activityTips
+            destination?.skill = detailActivity[row].skillTitle.recordID
+            destination?.program = CKRecord.ID(recordName: detailActivity[row].baseProgramTitle)
+        }
+    }
 
 }
 

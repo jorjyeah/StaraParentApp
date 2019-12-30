@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="51p-Ar-mTv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="51p-Ar-mTv">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +10,7 @@
         <!--Welcome!-->
         <scene sceneID="uRq-RO-6L9">
             <objects>
-                <viewController id="vlH-Qp-l7e" customClass="TodayViewController" customModule="StaraParentApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vlH-Qp-l7e" customClass="TodayViewController" customModule="STARA_Parent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bEF-Og-KHN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -114,7 +114,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="activityListCell" rowHeight="128" id="Iy9-cP-bZx" customClass="ActivityListTableViewCell" customModule="StaraParentApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="activityListCell" rowHeight="128" id="Iy9-cP-bZx" customClass="ActivityListTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="128"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iy9-cP-bZx" id="pu6-Ll-OLh">
@@ -166,7 +166,7 @@
                                             <outlet property="promptLabel" destination="V9A-fa-ML0" id="ItU-Aa-NhM"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notesListCell" rowHeight="55" id="oEl-iC-MT2" customClass="NotesListTableViewCell" customModule="StaraParentApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notesListCell" rowHeight="55" id="oEl-iC-MT2" customClass="NotesListTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="156" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oEl-iC-MT2" id="Ec9-fh-BGD">
@@ -236,10 +236,10 @@
             </objects>
             <point key="canvasLocation" x="11.594202898550726" y="838.39285714285711"/>
         </scene>
-        <!--Activcity Detail View Controller-->
+        <!--Activicity Detail View Controller-->
         <scene sceneID="Hut-Gz-JGi">
             <objects>
-                <viewController id="C0Z-tk-WZ3" customClass="ActivcityDetailViewController" customModule="StaraParentApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="C0Z-tk-WZ3" customClass="ActivicityDetailViewController" customModule="STARA_Parent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sgC-Ss-45U">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -407,6 +407,7 @@
                     </view>
                     <connections>
                         <outlet property="activityLabel" destination="REd-4b-44e" id="lhC-Lt-wfG"/>
+                        <outlet property="activityNameLabel" destination="REd-4b-44e" id="fWA-tm-4R8"/>
                         <outlet property="helpfulTipsLabel" destination="eMp-Ia-KRS" id="Dbc-k4-6f2"/>
                         <outlet property="howToLabel" destination="FzX-gc-o9j" id="Sxn-9S-mFr"/>
                         <outlet property="mediaLabel" destination="adc-Xa-8X2" id="tw9-NX-dof"/>
@@ -422,13 +423,13 @@
         <!--Select Profile-->
         <scene sceneID="C4x-pW-huw">
             <objects>
-                <viewController id="T4Z-we-x3A" customClass="SelectProfileViewController" customModule="StaraParentApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="T4Z-we-x3A" customClass="SelectProfileViewController" customModule="STARA_Parent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gx7-Sh-aij">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Vmg-5E-sw9">
-                                <rect key="frame" x="147" y="112.5" width="120" height="119.5"/>
+                                <rect key="frame" x="147" y="112.5" width="120" height="119"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="dAp-3h-Qmp"/>
                                     <constraint firstAttribute="width" constant="120" id="rXB-tW-Jkj"/>
@@ -456,20 +457,20 @@
                                 <rect key="frame" x="0.0" y="379" width="414" height="483"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="sfH-rD-EGx">
-                                    <rect key="frame" x="0.0" y="186" width="414" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="187" width="414" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="studentCell" id="VdW-yr-SW4" customClass="StudentListTableViewCell" customModule="StaraParentApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="studentCell" id="VdW-yr-SW4" customClass="StudentListTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VdW-yr-SW4" id="IXV-F7-xM7">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4MU-sk-YWo">
-                                                    <rect key="frame" x="16" y="11" width="382" height="21"/>
+                                                    <rect key="frame" x="16" y="11" width="382" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -486,15 +487,15 @@
                                             <outlet property="studentNameLabel" destination="4MU-sk-YWo" id="rBt-6r-9zM"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="institutionCell" id="Rt8-Fc-4kY" customClass="InstitutionListTableViewCell" customModule="StaraParentApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="71" width="414" height="43"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="institutionCell" id="Rt8-Fc-4kY" customClass="InstitutionListTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="71.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rt8-Fc-4kY" id="I8i-Ae-I9b">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Institution" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MkP-dC-3Yj">
-                                                    <rect key="frame" x="16" y="11" width="382" height="21"/>
+                                                    <rect key="frame" x="16" y="11" width="382" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -511,15 +512,15 @@
                                             <outlet property="institutionNameLabel" destination="MkP-dC-3Yj" id="7No-AW-zpP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addInstitutionCell" id="l6K-ns-eL4" customClass="AddInstitutionTableViewCell" customModule="StaraParentApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="114" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addInstitutionCell" id="l6K-ns-eL4" customClass="AddInstitutionTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="115" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l6K-ns-eL4" id="Rm9-DF-6DQ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lHu-Hp-EwM">
-                                                    <rect key="frame" x="16" y="11.5" width="22" height="22"/>
+                                                    <rect key="frame" x="16" y="11.5" width="22" height="21.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="KAV-j1-fec"/>
                                                         <constraint firstAttribute="height" constant="22" id="P2n-PH-2kw"/>
@@ -592,7 +593,7 @@
         <!--Add Therapist View Controller-->
         <scene sceneID="KnM-Lo-QyG">
             <objects>
-                <viewController id="wYG-bW-bWn" customClass="AddTherapistViewController" customModule="StaraParentApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wYG-bW-bWn" customClass="AddTherapistViewController" customModule="STARA_Parent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l7t-QI-hxO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -611,7 +612,7 @@
                                 </items>
                             </navigationBar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fcu-gH-eEI">
-                                <rect key="frame" x="27" y="241" width="360" height="360"/>
+                                <rect key="frame" x="27" y="241" width="360" height="359.5"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="360" id="Sau-Or-yxN"/>
@@ -644,13 +645,13 @@
         <!--New Profile-->
         <scene sceneID="DBz-9K-sxN">
             <objects>
-                <viewController id="vzC-t5-hON" customClass="AddProfileViewController" customModule="StaraParentApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vzC-t5-hON" customClass="AddProfileViewController" customModule="STARA_Parent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Dd-I7-fp0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="eRB-6h-whA">
-                                <rect key="frame" x="127" y="112.5" width="160" height="159"/>
+                                <rect key="frame" x="127" y="112.5" width="160" height="158.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="B2T-ci-4vf"/>
                                     <constraint firstAttribute="height" constant="159.5" id="YBU-Y3-3w6"/>
@@ -659,7 +660,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHN-rA-Dos">
                                 <rect key="frame" x="16" y="355.5" width="382" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" systemColor="systemGrayColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2NC-7T-Abr">
@@ -670,7 +671,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4F0-KA-H1A">
                                 <rect key="frame" x="16" y="429.5" width="382" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" systemColor="systemGrayColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BVf-2e-srg">
@@ -681,7 +682,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7p-BM-Qcq">
                                 <rect key="frame" x="16" y="503.5" width="382" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" systemColor="systemGrayColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SOq-vW-3R6">
@@ -692,7 +693,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXr-eB-thw">
                                 <rect key="frame" x="16" y="577.5" width="382" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" systemColor="systemGrayColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Choose Your Gender" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kzM-HG-ahA">
@@ -785,9 +786,9 @@
     </scenes>
     <resources>
         <image name="person.2.fill" catalog="system" width="64" height="40"/>
-        <image name="person.crop.circle.fill" catalog="system" width="64" height="62"/>
-        <image name="person.crop.circle.fill.badge.plus" catalog="system" width="64" height="52"/>
-        <image name="plus.circle.fill" catalog="system" width="64" height="62"/>
+        <image name="person.crop.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="person.crop.circle.fill.badge.plus" catalog="system" width="64" height="50"/>
+        <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
         <image name="qrcode" catalog="system" width="64" height="56"/>
     </resources>
     <color key="tintColor" red="0.72549019609999998" green="0.51764705879999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
