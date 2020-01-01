@@ -46,6 +46,7 @@
 		B9D11C4623B4C267001C73ED /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D11C4523B4C267001C73ED /* ProfileModel.swift */; };
 		B9D11C4823B4C42F001C73ED /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D11C4723B4C42F001C73ED /* ProfileManager.swift */; };
 		B9D11C4A23B4D760001C73ED /* StaraUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D11C4923B4D760001C73ED /* StaraUIViewController.swift */; };
+		B9F2EDA823B9F7BC000D3FFF /* ParentFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F2EDA723B9F7BC000D3FFF /* ParentFeedbackManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		B9D11C4523B4C267001C73ED /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		B9D11C4723B4C42F001C73ED /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		B9D11C4923B4D760001C73ED /* StaraUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaraUIViewController.swift; sourceTree = "<group>"; };
+		B9F2EDA723B9F7BC000D3FFF /* ParentFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentFeedbackManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 		680B666F23B3D3720093C8AF /* Today */ = {
 			isa = PBXGroup;
 			children = (
+				B9F2EDA623B9F798000D3FFF /* Manager */,
 				B9F2EDA523B9E6A0000D3FFF /* Model */,
 				680B667223B3D4150093C8AF /* Controller */,
 				680B667123B3D4070093C8AF /* View */,
@@ -360,6 +363,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B9F2EDA623B9F798000D3FFF /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B9F2EDA723B9F7BC000D3FFF /* ParentFeedbackManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -510,6 +521,7 @@
 				B931FF0B23B75C19003F2B9E /* DetailedReportDataManager.swift in Sources */,
 				680B667823B3D5000093C8AF /* LogbookViewController.swift in Sources */,
 				680B669D23B7DACA0093C8AF /* AddProfileViewController.swift in Sources */,
+				B9F2EDA823B9F7BC000D3FFF /* ParentFeedbackManager.swift in Sources */,
 				680B669F23B7DAD80093C8AF /* AddTherapistViewController.swift in Sources */,
 				B9B8E7C823AE09670071D058 /* AppDelegate.swift in Sources */,
 				680B668523B47CE30093C8AF /* LogbookTableViewCell.swift in Sources */,

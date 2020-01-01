@@ -48,21 +48,22 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
         audioAttachmentButton.setImage(recordingPlay, for: .normal)
         
         //Looks for single or multiple taps.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
 
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
 
-        view.addGestureRecognizer(tap)
+//        view.addGestureRecognizer(tap)
         
         feedbackTextView.text = "Write your notes about today's activity"
         feedbackTextView.textColor = UIColor.lightGray
 //        feedbackTextView.becomeFirstResponder()
         feedbackTextView.delegate = self // agar fungsi check changed dan placeholdernya nyala, harus di delegasikan ke UIVC
         feedbackTextView.selectedTextRange = feedbackTextView.textRange(from: feedbackTextView.beginningOfDocument, to: feedbackTextView.beginningOfDocument)
+        feedbackTextView.doneButton(title: "Done", target: self, selector: #selector(dismissKeyboard(sender:)))
     }
     
-    @objc func dismissKeyboard() {
+    @objc func dismissKeyboard(sender: Any) {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
@@ -163,8 +164,24 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
     @IBAction func submitButtonTapped(_ sender: Any) {
         //disini ga perform segue
         //ambil value dari textview dulu
-        if parentNotes != nil {
-            //nanti dia send value ke parents report
+
+        
+        if let parentNotes = parentNotes {
+            if parentNotes != "" {
+                ParentFeedbackManager.saveFeedback(parentNotes: parentNotes, therapySessionRecordID: therapyRecordID) { (ParentNotesModel, parentNotesRecordID) in
+                    print(parentNotesRecordID)
+                    let alertController = UIAlertController(title: "Feedback Saved", message: "Your feedback successfully saved, press OK to continue.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+        } else {
+            print("not saved")
+            let alertController = UIAlertController(title: "Cannot saved feedback", message: "Please try again, press OK to continue.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
         }
         
         //jadi nanti number of row in section untuk notes nya nambah datanya
@@ -321,6 +338,19 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate, UITex
             destination?.program = CKRecord.ID(recordName: detailActivity[row].baseProgramTitle)
         }
     }
+}
 
+extension UITextView{
+    // add Done button for textView
+    func doneButton(title: String, target: Any, selector: Selector) {
+        let toolBar = UIToolbar(frame: CGRect(x: 0.0,
+                                              y: 0.0,
+                                              width: UIScreen.main.bounds.size.width,
+                                              height: 44.0))//1
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)//2
+        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)//3
+        toolBar.setItems([flexible, barButton], animated: false)//4
+        self.inputAccessoryView = toolBar//5
+    }
 }
 
