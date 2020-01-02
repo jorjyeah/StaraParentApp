@@ -18,19 +18,68 @@ class SelectProfileViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-    let studentListArray = ["Daniel", "George"]
-    let therapistListArray = ["Miss Bianca", "Miss Dea"]
-    let institutionListArray = ["Dzone Therapy Center", "Anakku Therapy Center"]
+//    let studentListArray = ["Daniel", "George"]
+    var studentListArray = [ChildrenDataModel]()
+    var therapistListArray = [TherapistDataModel]()
+    var studentSelected : ChildrenDataModel?
+    var therapistSelected : TherapistDataModel?
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        populateChildren()
+        populateDetailsChild()
         // MARK: - Styling
         navigationController?.navigationBar.backItem?.title = "Back"
     }
 
-
+    func populateTherapist(){
+        let reloadGroup = DispatchGroup()
+        
+        reloadGroup.enter()
+        TherapistDataManager.checkAvailabilityStudent { (arrayOfTherapistUID) in
+            TherapistDataManager.getTherapistData(therapistUID: arrayOfTherapistUID) { (arrayOfTherapist) in
+                self.therapistListArray = arrayOfTherapist
+                print(self.therapistListArray.count)
+                reloadGroup.leave()
+            }
+        }
+        
+        reloadGroup.notify(queue: .main){
+            self.tableView.reloadData()
+        }
+    }
+    
+    func populateDetailsChild(){
+        let userDefaults = UserDefaults.standard
+        
+        self.studentNameLabel.text = userDefaults.string(forKey: "selectedStudentName")
+        let form = DateComponentsFormatter()
+        form.maximumUnitCount = 2
+        form.unitsStyle = .full
+        form.allowedUnits = [.year, .month]
+        guard let childDOB : Date = userDefaults.object(forKey: "selectedStudentDOB") as? Date else { return }
+        guard let ageInYears = form.string(from: childDOB, to: Date()) else { return }
+        guard let childGender : String = userDefaults.string(forKey: "selectedStudentGender") else { return }
+        self.studentGenderAgeLabel.text = "\(childGender) , \(ageInYears) old"
+    }
+    
+    func populateChildren(){
+        let reloadGroup = DispatchGroup()
+        
+        reloadGroup.enter()
+        ChildrenDataManager.getParentData { (parentModel) in
+            ChildrenDataManager.getChildrenData(parentUID : parentModel.profileRecordID) { (arrayOfChildren) in
+                self.studentListArray = arrayOfChildren
+                print(self.studentListArray.count)
+                reloadGroup.leave()
+            }
+        }
+        
+        reloadGroup.notify(queue: .main){
+            self.tableView.reloadData()
+        }
+    }
 }
 
 extension SelectProfileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -40,9 +89,9 @@ extension SelectProfileViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
            if section == 0 {
-               return "PROFILE"
+               return "Children"
            } else if section == 1 {
-               return "INSTITUTION"
+               return "Institution"
            } else {
                return " "
            }
@@ -62,13 +111,13 @@ extension SelectProfileViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as! StudentListTableViewCell
-            cell.studentNameLabel.text = studentListArray[indexPath.row]
+            cell.studentNameLabel.text = studentListArray[indexPath.row].childrentName
             
             return  cell
             
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "institutionCell", for: indexPath) as! InstitutionListTableViewCell
-            cell.institutionNameLabel.text = institutionListArray[indexPath.row] + " - " + therapistListArray[indexPath.row]
+            cell.institutionNameLabel.text = therapistListArray[indexPath.row].institutionName + " - " + therapistListArray[indexPath.row].therapistName
         
             return  cell
         } else {
@@ -81,10 +130,40 @@ extension SelectProfileViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             //ini nanti switch akun student
+            studentListArray[indexPath.row].isSelected = true
+            studentSelected = studentListArray[indexPath.row]
+            
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(studentSelected?.childrenRecordID, forKey: "selectedStudent")
+            userDefaults.set(studentSelected?.childrentName, forKey: "selectedStudentName")
+            userDefaults.set(studentSelected?.childGender, forKey: "selectedStudentGender")
+            userDefaults.set(studentSelected?.childDOB, forKey: "selectedStudentDOB")
+            
+            populateDetailsChild()
+            populateTherapist()
+            
+            
+            
         } else if indexPath.section == 1 {
             //ini nanti switch institusi student
+            therapistListArray[indexPath.row].isSelected = true
+            therapistSelected = therapistListArray[indexPath.row]
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(therapistSelected?.therapistRecordID, forKey: "selectedTherapist")
         } else if indexPath.section == 2{
             performSegue(withIdentifier: "showQRCode", sender: self)
         }
     }
+    
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        if indexPath.section == 0 {
+//            //ini nanti switch akun student
+//            studentListArray[indexPath.row].isSelected = false
+//            studentSelected = studentListArray[indexPath.row]
+//        } else if indexPath.section == 1 {
+//            //ini nanti switch institusi student
+//            therapistListArray[indexPath.row].isSelected = false
+//            therapistSelected = studentListArray[indexPath.row]
+//        }
+//    }
 }
