@@ -17,6 +17,7 @@ class ParentNotesManager{
         let predicate = NSPredicate(format: "therapySession IN %@", therapySessionReference)
         
         let query = CKQuery(recordType: "ParentNotes", predicate: predicate)
+        query.sortDescriptors = [NSSortDescriptor(key: "parentNoteDay", ascending: false)]
         let database = CKContainer(identifier: "iCloud.com.jorjyeah.FinalChallengeAppNew").publicCloudDatabase
         database.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {

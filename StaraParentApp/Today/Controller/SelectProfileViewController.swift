@@ -23,12 +23,14 @@ class SelectProfileViewController: UIViewController {
     var therapistListArray = [TherapistDataModel]()
     var studentSelected : ChildrenDataModel?
     var therapistSelected : TherapistDataModel?
+    var indexStudentSelectedPrevious : Int?
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         populateChildren()
         populateDetailsChild()
+        tableView.allowsMultipleSelection = true
         // MARK: - Styling
         navigationController?.navigationBar.backItem?.title = "Back"
     }
@@ -40,13 +42,15 @@ class SelectProfileViewController: UIViewController {
         TherapistDataManager.checkAvailabilityStudent { (arrayOfTherapistUID) in
             TherapistDataManager.getTherapistData(therapistUID: arrayOfTherapistUID) { (arrayOfTherapist) in
                 self.therapistListArray = arrayOfTherapist
-                print(self.therapistListArray.count)
+//                print(self.therapistListArray.count)
                 reloadGroup.leave()
             }
         }
         
         reloadGroup.notify(queue: .main){
-            self.tableView.reloadData()
+            // reload data only section 1
+            self.tableView.reloadSections([1], with: .automatic)
+            self.tableView.selectRow(at: IndexPath.init(row: 0, section: 1), animated: false, scrollPosition: .none)
         }
     }
     
@@ -62,6 +66,11 @@ class SelectProfileViewController: UIViewController {
         guard let ageInYears = form.string(from: childDOB, to: Date()) else { return }
         guard let childGender : String = userDefaults.string(forKey: "selectedStudentGender") else { return }
         self.studentGenderAgeLabel.text = "\(childGender) , \(ageInYears) old"
+        if let childPhoto = userDefaults.object(forKey: "selectedStudentPhoto") as? Data {
+            let childImage = UIImage(data: childPhoto)
+            self.profilePictureImageView.image = childImage
+        }
+        
     }
     
     func populateChildren(){
@@ -71,7 +80,7 @@ class SelectProfileViewController: UIViewController {
         ChildrenDataManager.getParentData { (parentModel) in
             ChildrenDataManager.getChildrenData(parentUID : parentModel.profileRecordID) { (arrayOfChildren) in
                 self.studentListArray = arrayOfChildren
-                print(self.studentListArray.count)
+//                print(self.studentListArray.count)
                 reloadGroup.leave()
             }
         }
@@ -127,13 +136,35 @@ extension SelectProfileViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            if let selectedStudentUserID = UserDefaults.standard.string(forKey: "selectedStudent"){
+                if studentListArray[indexPath.row].childrenRecordID == selectedStudentUserID{
+                    populateTherapist()
+                    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+                }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             //ini nanti switch akun student
-            studentListArray[indexPath.row].isSelected = true
-            studentSelected = studentListArray[indexPath.row]
             
+            // prevention for multiple selected in section Children
+            if let indexPathsInSection = tableView.indexPathsForSelectedRows?.filter ({ $0.section == indexPath.section && $0.row != indexPath.row }) {
+                for selectedPath in indexPathsInSection {
+                    tableView.deselectRow(at: selectedPath, animated: false)
+                }
+            }
+            
+            studentSelected = studentListArray[indexPath.row]
+            studentListArray[indexPath.row].isSelected = true
+
             let userDefaults = UserDefaults.standard
+            if let pngPhotoData = studentSelected?.childPhoto.pngData() {
+                userDefaults.set(pngPhotoData, forKey: "selectedStudentPhoto")
+            }
             userDefaults.set(studentSelected?.childrenRecordID, forKey: "selectedStudent")
             userDefaults.set(studentSelected?.childrentName, forKey: "selectedStudentName")
             userDefaults.set(studentSelected?.childGender, forKey: "selectedStudentGender")
@@ -141,8 +172,6 @@ extension SelectProfileViewController: UITableViewDelegate, UITableViewDataSourc
             
             populateDetailsChild()
             populateTherapist()
-            
-            
             
         } else if indexPath.section == 1 {
             //ini nanti switch institusi student
@@ -154,16 +183,4 @@ extension SelectProfileViewController: UITableViewDelegate, UITableViewDataSourc
             performSegue(withIdentifier: "showQRCode", sender: self)
         }
     }
-    
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        if indexPath.section == 0 {
-//            //ini nanti switch akun student
-//            studentListArray[indexPath.row].isSelected = false
-//            studentSelected = studentListArray[indexPath.row]
-//        } else if indexPath.section == 1 {
-//            //ini nanti switch institusi student
-//            therapistListArray[indexPath.row].isSelected = false
-//            therapistSelected = studentListArray[indexPath.row]
-//        }
-//    }
 }
