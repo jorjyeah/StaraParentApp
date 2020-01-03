@@ -11,9 +11,9 @@ import CloudKit
 class TherapySessionManager{
     class func getTherapySession(onComplete: @escaping ([TherapySessionModel]) -> Void){
         var therapySessionModel = [TherapySessionModel]()
-        
-//        let therapistID = String(UserDefaults.standard.string(forKey: "selectedTherapistName")!)
-//        let studentID = String(UserDefaults.standard.string(forKey: "selectedStudentName")!)
+//        
+//        let therapistID = String(UserDefaults.standard.string(forKey: "selectedTherapist")!)
+//        let studentID = String(UserDefaults.standard.string(forKey: "selectedStudent")!)
         let therapistID = "_ea0bc15cf2724fb7d557dc0049ecdb01"
         let studentID = "BC2819E0-35A0-174D-7CE4-2AB632112361"
         

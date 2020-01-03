@@ -22,11 +22,32 @@ class AddProfileViewController: UIViewController {
 //    let therapistData = ProfileTherapistCKModel.self
 //    var imagePicker: ImagePicker!
 //    var newData = [String]()
+    var datePicker = UIDatePicker()
+    var dateOfBirth = Date()
     
-
+    func createDatePicker(){
+        datePicker.datePickerMode = .date
+        ageTextField.inputView = datePicker
+        ageTextField.doneButton(title: "Done", target: self, selector: #selector(dismissDatePicker(sender:)))
+    }
+    
+    @objc func dismissDatePicker(sender: Any) {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMM yyyy"
+        ageTextField.text = "\(formatter.string(from: datePicker.date))"
+        dateOfBirth = datePicker.date
+        self.view.endEditing(true)
+    }
+    
+    @objc func dismissKeyboard(sender: Any) {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        self.view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        createDatePicker()
 //        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
 //        populateProfileTherapist()
 //

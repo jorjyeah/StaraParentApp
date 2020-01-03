@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import CloudKit
 
 class TodayViewController: UIViewController, AVAudioPlayerDelegate {
     
@@ -24,55 +25,91 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var submitButton: UIButton!
     
     // MARK: - Properties
-    let activityListArray = ["Stomp Feet", "Bear Hug"]
-    let promptListArray = ["Visual", "Gesture"]
-    let mediaListArray = ["Ground", "-"]
-    let notesArray = ["Molly was doing good on Stomp Feet activity today, but still need guidance on doing it. If Molly starts crying while doing the Stompt Feet activity please give her a Bear Hug. Good job Molly, see you on Wednesday :)"]
     
-    
+    var parentNotes : String?
+    var therapySession = [TherapySessionModel]()
+    var detailActivity = [DetailedReportModel]()
+    var therapyNotes = String()
+    var therapyRecordID = CKRecord.ID()
     var fileName: String = "audioFile.m4a"
     var audioData = Data()
     var audioFilename = URL(string: "")
     var audioPlayer: AVAudioPlayer!
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getActivitySession()
+        
         audioAttachmentButton.isEnabled = false
         imageAttachmentImageView.isHidden = true
         
         let recordingPlay = UIImage(named: "Recordings Play")?.withRenderingMode(.alwaysOriginal)
         audioAttachmentButton.setImage(recordingPlay, for: .normal)
         
+        //Looks for single or multiple taps.
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+
+//        view.addGestureRecognizer(tap)
+        
+        feedbackTextView.text = "Write your notes about today's activity"
+        feedbackTextView.textColor = UIColor.lightGray
+//        feedbackTextView.becomeFirstResponder()
+        feedbackTextView.delegate = self // agar fungsi check changed dan placeholdernya nyala, harus di delegasikan ke UIVC
+        feedbackTextView.selectedTextRange = feedbackTextView.textRange(from: feedbackTextView.beginningOfDocument, to: feedbackTextView.beginningOfDocument)
+        feedbackTextView.doneButton(title: "Done", target: self, selector: #selector(dismissKeyboard(sender:)))
     }
     
-//    func getActivitySession(){
-//        print(therapySessionNotes)
-//        DetailedReportDataManager.getDetailedTherapySession(therapySessionRecordID: therapySessionRecordID) { (activityRecordsID) in
-//            DetailedReportDataManager.getDetailedActivity(activityRecordID: activityRecordsID) { (DetailActivitiesData) in
-//                self.detailActivity = DetailActivitiesData
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//        }
-//
-//        DetailedReportDataManager.getAudio(therapySessionRecordID: therapySessionRecordID) { (audioNSURL) in
-//            if audioNSURL != nil{
-//                self.setupPlayer(audioNSURL: audioNSURL)
-//                self.audioAttachmentButton.isEnabled = true
-//            }
-//        }
-//
-//        DetailedReportDataManager.getPhoto(therapySessionRecordID: therapySessionRecordID) { (imagePhoto) in
-//            guard let photo = imagePhoto as? UIImage else {
-//                return
-//            }
-//            self.imageAttachment.image = photo
-//            self.imageAttachment.isHidden = false
-//        }
-//    }
+    @objc func dismissKeyboard(sender: Any) {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    func getActivitySession(){
+        let reloadGroup = DispatchGroup()
+        
+        reloadGroup.enter()
+        TherapySessionManager.getTherapySession { (arrayOfTherapySession) in
+            self.therapySession = arrayOfTherapySession
+            self.therapyNotes = arrayOfTherapySession[0].therapySessionNotes
+            self.therapyRecordID = arrayOfTherapySession[0].therapySessionRecordID
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, d MMM yyyy"
+            DispatchQueue.main.async {
+                self.todayDateLabel.text = "Activities on \(formatter.string(from: arrayOfTherapySession[0].therapySessionDate))" // diganti date dari Data
+            }
+            
+            reloadGroup.leave()
+        }
+        
+        
+        reloadGroup.notify(queue: .main){
+            DetailedReportDataManager.getDetailedTherapySession(therapySessionRecordID: self.therapyRecordID) { (activityRecordsID) in
+                DetailedReportDataManager.getDetailedActivity(activityRecordID: activityRecordsID) { (DetailActivitiesData) in
+                    self.detailActivity = DetailActivitiesData
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+
+            DetailedReportDataManager.getAudio(therapySessionRecordID: self.therapyRecordID) { (audioNSURL) in
+                self.setupPlayer(audioNSURL: audioNSURL)
+                self.audioAttachmentButton.isEnabled = true
+            }
+
+            DetailedReportDataManager.getPhoto(therapySessionRecordID: self.therapyRecordID) { (imagePhoto) in
+                guard let photo = imagePhoto as? UIImage else {
+                    return
+                }
+                self.imageAttachmentImageView.image = photo
+                self.imageAttachmentImageView.isHidden = false
+            }
+        }
+    }
     
 // MARK: - Play and Pause Audio
     func getDocumentsDirectory() -> URL {
@@ -127,7 +164,26 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
     @IBAction func submitButtonTapped(_ sender: Any) {
         //disini ga perform segue
         //ambil value dari textview dulu
-        //nanti dia send value ke parents report
+
+        
+        if let parentNotes = parentNotes {
+            if parentNotes != "" {
+                ParentFeedbackManager.saveFeedback(parentNotes: parentNotes, therapySessionRecordID: therapyRecordID) { (ParentNotesModel, parentNotesRecordID) in
+                    print(parentNotesRecordID)
+                    let alertController = UIAlertController(title: "Feedback Saved", message: "Your feedback successfully saved, press OK to continue.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+        } else {
+            print("not saved")
+            let alertController = UIAlertController(title: "Cannot saved feedback", message: "Please try again, press OK to continue.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
         //jadi nanti number of row in section untuk notes nya nambah datanya
         //setelahnya textviewnya kosong
         
@@ -137,7 +193,7 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
 }
 
 // MARK: - Delegate and Data Source
-extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
+extension TodayViewController: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
     
 // MARK: - Section
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -165,7 +221,7 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return activityListArray.count
+            return detailActivity.count
         } else {
             return 1
         }
@@ -174,38 +230,140 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             
-//            var prompts = String()
-//            detailActivity[indexPath.row].activityPrompt .forEach { (prompt) in
-//                prompts.append("\(prompt), ")
-//            }
+            var prompts = String()
+            detailActivity[indexPath.row].activityPrompt .forEach { (prompt) in
+                prompts.append("\(prompt), ")
+            }
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "activityListCell", for: indexPath) as! ActivityListTableViewCell
             
-            cell.activityLabel.text = activityListArray[indexPath.row]
-            cell.promptLabel.text = "Prompt: " + promptListArray[indexPath.row]
-            cell.mediaLabel.text = "Media: " + mediaListArray[indexPath.row]
-        
+            cell.activityLabel.text = detailActivity[indexPath.row].activityTitle
+            cell.promptLabel.text = "Prompt: " + prompts
+            cell.mediaLabel.text = "Media: " + detailActivity[indexPath.row].activityMedia
             return  cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "notesListCell", for: indexPath) as!  NotesListTableViewCell
+            if therapyNotes == ""{
+                cell.notesLabel.text = "There's no note from the therapist"
+            } else {
+                cell.notesLabel.text = therapyNotes
+            }
             
-            cell.notesLabel.text = notesArray[indexPath.row]
             return  cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            performSegue(withIdentifier: "showActivityDetail", sender: self)
+            performSegue(withIdentifier: "showActivityDetail", sender: indexPath.row)
         }
     }
     
+    // untuk get notesnya
+    func textViewDidChange(_ textView: UITextView) {
+        self.parentNotes = textView.text
+        print(parentNotes)
+    }
+    
+    // untuk placeholdernya
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray && textView.text != nil{
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+
+        // Combine the textView text and the replacement text to
+        // create the updated text string
+        let currentText:String = textView.text
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
+
+        // If updated text view will be empty, add the placeholder
+        // and set the cursor to the beginning of the text view
+        if updatedText.isEmpty {
+            textView.text = "Let the therapist know what's in your thought"
+            textView.textColor = UIColor.lightGray
+
+            textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
+        }
+
+        // Else if the text view's placeholder is showing and the
+        // length of the replacement string is greater than 0, set
+        // the text color to black then set its text to the
+        // replacement string
+         else if textView.textColor == UIColor.lightGray && !text.isEmpty {
+            textView.textColor = UIColor.black
+            textView.text = text
+        }
+
+        // For every other case, the text should change with the usual
+        // behavior...
+        else {
+            return true
+        }
+
+        // ...otherwise return false since the updates have already
+        // been made
+        return false
+    }
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if self.view.window != nil {
+            if textView.textColor == UIColor.lightGray {
+                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
+            }
+        }
+    }
     
 // MARK: - Prepare for Segue
-//     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showActivityDetail" {
+            let destination = segue.destination as? ActivicityDetailViewController
+            let row = sender as! Int
+            var prompts = String()
+            detailActivity[row].activityPrompt .forEach { (prompt) in
+                prompts.append("\(prompt), ")
+            }
 
+            destination?.activity = detailActivity[row].activityTitle
+            destination?.howTo = detailActivity[row].activityDesc
+            destination?.prompt = prompts
+            print(prompts)
+            destination?.media = detailActivity[row].activityMedia
+            destination?.tips  = detailActivity[row].activityTips
+            destination?.skill = detailActivity[row].skillTitle.recordID
+            destination?.program = CKRecord.ID(recordName: detailActivity[row].baseProgramTitle)
+        }
+    }
 }
 
+extension UITextView{
+    // add Done button for textView
+    func doneButton(title: String, target: Any, selector: Selector) {
+        let toolBar = UIToolbar(frame: CGRect(x: 0.0,
+                                              y: 0.0,
+                                              width: UIScreen.main.bounds.size.width,
+                                              height: 44.0))//1
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)//2
+        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)//3
+        toolBar.setItems([flexible, barButton], animated: false)//4
+        self.inputAccessoryView = toolBar//5
+    }
+}
+
+extension UITextField{
+    // add Done button for textView
+    func doneButton(title: String, target: Any, selector: Selector) {
+        let toolBar = UIToolbar(frame: CGRect(x: 0.0,
+                                              y: 0.0,
+                                              width: UIScreen.main.bounds.size.width,
+                                              height: 44.0))//1
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)//2
+        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)//3
+        toolBar.setItems([flexible, barButton], animated: false)//4
+        self.inputAccessoryView = toolBar//5
+    }
+}

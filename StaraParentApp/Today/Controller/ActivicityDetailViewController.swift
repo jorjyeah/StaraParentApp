@@ -9,9 +9,10 @@
 import UIKit
 import CloudKit
 
-class ActivcityDetailViewController: UIViewController {
+class ActivicityDetailViewController: UIViewController {
     
     // MARK: - IBOutlets
+    @IBOutlet weak var activityNameLabel: UILabel!
     @IBOutlet weak var activityLabel: UILabel!
     @IBOutlet weak var howToLabel: UILabel!
     @IBOutlet weak var promptLabel: UILabel!
@@ -37,19 +38,19 @@ class ActivcityDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        DispatchQueue.main.async {
-//            self.activityNameLabel.text = self.activity
-//            self.howToLabel.text = self.howTo
-//            self.promptLabel.text = self.prompt
-//            self.mediaLabel.text = self.media
-//            self.helpfulTipsLabel.text = self.tips
-//            ReadableData.translateSkill(skillRecordID: self.skill!) { (readableSkill) in
-//                self.skillLabel.text = readableSkill
-//            }
-//            ReadableData.translateBaseProgram(baseProgramRecordID: self.program!) { (readableBaseProgram) in
-//                self.programLabel.text = readableBaseProgram
-//            }
-//        }
+        DispatchQueue.main.async {
+            self.activityNameLabel.text = self.activity
+            self.howToLabel.text = self.howTo
+            self.promptLabel.text = self.prompt
+            self.mediaLabel.text = self.media
+            self.helpfulTipsLabel.text = self.tips
+            ReadableData.translateSkill(skillRecordID: self.skill!) { (readableSkill) in
+                self.skillLabel.text = readableSkill
+            }
+            ReadableData.translateBaseProgram(baseProgramRecordID: self.program!) { (readableBaseProgram) in
+                self.programLabel.text = readableBaseProgram
+            }
+        }
     }
     
 
