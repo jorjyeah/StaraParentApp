@@ -61,6 +61,10 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
         feedbackTextView.delegate = self // agar fungsi check changed dan placeholdernya nyala, harus di delegasikan ke UIVC
         feedbackTextView.selectedTextRange = feedbackTextView.textRange(from: feedbackTextView.beginningOfDocument, to: feedbackTextView.beginningOfDocument)
         feedbackTextView.doneButton(title: "Done", target: self, selector: #selector(dismissKeyboard(sender:)))
+        
+        // notif for view if keyboard will show or hide
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func dismissKeyboard(sender: Any) {

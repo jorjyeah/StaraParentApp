@@ -26,6 +26,8 @@
 		680B66A323B88A2C0093C8AF /* ActivityListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A223B88A2C0093C8AF /* ActivityListTableViewCell.swift */; };
 		680B66A523B88A3E0093C8AF /* NotesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A423B88A3E0093C8AF /* NotesListTableViewCell.swift */; };
 		680B66A723B8904E0093C8AF /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680B66A623B8904E0093C8AF /* TodayViewController.swift */; };
+		B91DEDA223C508DF003CDBA2 /* TodayExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91DEDA123C508DF003CDBA2 /* TodayExtensionViewController.swift */; };
+		B91DEDA423C50ABC003CDBA2 /* AddProfileExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91DEDA323C50ABC003CDBA2 /* AddProfileExtensionViewController.swift */; };
 		B91EF3A923BCB6F500F3AFDC /* ChildrenDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91EF3A823BCB6F500F3AFDC /* ChildrenDataManager.swift */; };
 		B91EF3AB23BCB70400F3AFDC /* ChildrenDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91EF3AA23BCB70400F3AFDC /* ChildrenDataModel.swift */; };
 		B91EF3AD23BCE6BD00F3AFDC /* TherapistDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91EF3AC23BCE6BD00F3AFDC /* TherapistDataModel.swift */; };
@@ -90,6 +92,8 @@
 		680B66A223B88A2C0093C8AF /* ActivityListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListTableViewCell.swift; sourceTree = "<group>"; };
 		680B66A423B88A3E0093C8AF /* NotesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListTableViewCell.swift; sourceTree = "<group>"; };
 		680B66A623B8904E0093C8AF /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		B91DEDA123C508DF003CDBA2 /* TodayExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayExtensionViewController.swift; sourceTree = "<group>"; };
+		B91DEDA323C50ABC003CDBA2 /* AddProfileExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileExtensionViewController.swift; sourceTree = "<group>"; };
 		B91EF3A823BCB6F500F3AFDC /* ChildrenDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenDataManager.swift; sourceTree = "<group>"; };
 		B91EF3AA23BCB70400F3AFDC /* ChildrenDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrenDataModel.swift; sourceTree = "<group>"; };
 		B91EF3AC23BCE6BD00F3AFDC /* TherapistDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TherapistDataModel.swift; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 				680B669C23B7DACA0093C8AF /* AddProfileViewController.swift */,
 				680B669E23B7DAD80093C8AF /* AddTherapistViewController.swift */,
 				680B66A023B888C70093C8AF /* ActivicityDetailViewController.swift */,
+				B91DEDA123C508DF003CDBA2 /* TodayExtensionViewController.swift */,
+				B91DEDA323C50ABC003CDBA2 /* AddProfileExtensionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -526,12 +532,14 @@
 				680B668823B4821C0093C8AF /* ParentsDetailViewController.swift in Sources */,
 				680B668A23B482340093C8AF /* TherapistDetailViewController.swift in Sources */,
 				B9D11C4823B4C42F001C73ED /* ProfileManager.swift in Sources */,
+				B91DEDA423C50ABC003CDBA2 /* AddProfileExtensionViewController.swift in Sources */,
 				680B669923B7D4200093C8AF /* InstitutionListTableViewCell.swift in Sources */,
 				680B66A323B88A2C0093C8AF /* ActivityListTableViewCell.swift in Sources */,
 				B9B8E7D223AE09670071D058 /* StaraParentApp.xcdatamodeld in Sources */,
 				B931FF0323B5FCB5003F2B9E /* ParentNotesModel.swift in Sources */,
 				B931FF0B23B75C19003F2B9E /* DetailedReportDataManager.swift in Sources */,
 				680B667823B3D5000093C8AF /* LogbookViewController.swift in Sources */,
+				B91DEDA223C508DF003CDBA2 /* TodayExtensionViewController.swift in Sources */,
 				680B669D23B7DACA0093C8AF /* AddProfileViewController.swift in Sources */,
 				B9F2EDA823B9F7BC000D3FFF /* ParentFeedbackManager.swift in Sources */,
 				680B669F23B7DAD80093C8AF /* AddTherapistViewController.swift in Sources */,
@@ -735,7 +743,7 @@
 				CODE_SIGN_ENTITLEMENTS = StaraParentApp/StaraParentApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A59P6GV5MM;
 				INFOPLIST_FILE = StaraParentApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -756,7 +764,7 @@
 				CODE_SIGN_ENTITLEMENTS = StaraParentApp/StaraParentApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A59P6GV5MM;
 				INFOPLIST_FILE = StaraParentApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
