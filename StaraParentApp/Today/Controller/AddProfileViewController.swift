@@ -10,6 +10,7 @@ import UIKit
 
 class AddProfileViewController: UIViewController {
     
+    
     // MARK: - IBOutlets
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var firstNameTextField: UITextField!
@@ -22,14 +23,28 @@ class AddProfileViewController: UIViewController {
 //    let therapistData = ProfileTherapistCKModel.self
 //    var imagePicker: ImagePicker!
 //    var newData = [String]()
+    var gender = ["Male","Female"]
+    var genderPicker = UIPickerView()
     var datePicker = UIDatePicker()
+    var selectedGender = String()
     var dateOfBirth = Date()
+    var activeTextField : UITextField?
+    let height = UIScreen.main.bounds.height
     
     func createDatePicker(){
         datePicker.datePickerMode = .date
         ageTextField.inputView = datePicker
         ageTextField.doneButton(title: "Done", target: self, selector: #selector(dismissDatePicker(sender:)))
     }
+    
+    func createGenderPicker(){
+        genderTextField.inputView = genderPicker
+        genderPicker.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
+        genderPicker.delegate = self
+        genderPicker.dataSource = self
+        
+        genderTextField.doneButton(title: "Done", target: self, selector: #selector(dismissKeyboard(sender:)))    }
     
     @objc func dismissDatePicker(sender: Any) {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
@@ -47,7 +62,10 @@ class AddProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firstNameTextField.doneButton(title: "Done", target: self, selector: #selector(dismissKeyboard(sender:)))
+        lastNameTextField.doneButton(title: "Done", target: self, selector: #selector(dismissKeyboard(sender:)))
         createDatePicker()
+        createGenderPicker()
 //        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
 //        populateProfileTherapist()
 //
@@ -110,7 +128,26 @@ class AddProfileViewController: UIViewController {
     }
     
 
-
+extension AddProfileViewController : UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return gender.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return gender[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedGender = gender[row]
+        genderTextField.text = gender[row]
+    }
+    
+    
+}
 
 //extension EditProfileViewController : ImagePickerDelegate, UITextFieldDelegate {
 //    func didSelect(image: UIImage?) {
