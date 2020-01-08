@@ -65,6 +65,16 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
         // notif for view if keyboard will show or hide
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        // MARK: - Styling
+        submitButton.layer.cornerRadius = 24
+        
+        feedbackTextView.backgroundColor = .white
+        feedbackTextView.layer.cornerRadius = 4
+        feedbackTextView.layer.borderWidth = 0.5
+        feedbackTextView.layer.borderColor = UIColor(red: 0.59, green: 0.59, blue: 0.59, alpha: 1).cgColor
+        
+        
     }
     
     @objc func dismissKeyboard(sender: Any) {
@@ -80,11 +90,11 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
             self.therapySession = arrayOfTherapySession
             self.therapyNotes = arrayOfTherapySession[0].therapySessionNotes
             self.therapyRecordID = arrayOfTherapySession[0].therapySessionRecordID
-            let formatter = DateFormatter()
-            formatter.dateFormat = "EEEE, d MMM yyyy"
-            DispatchQueue.main.async {
-                self.todayDateLabel.text = "Activities on \(formatter.string(from: arrayOfTherapySession[0].therapySessionDate))" // diganti date dari Data
-            }
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "EEEE, d MMM yyyy"
+//            DispatchQueue.main.async {
+//                self.todayDateLabel.text = "Activities on \(formatter.string(from: arrayOfTherapySession[0].therapySessionDate))" // diganti date dari Data
+//            }
             
             reloadGroup.leave()
         }
@@ -200,13 +210,34 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
 extension TodayViewController: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
     
 // MARK: - Section
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let myLabel = UILabel()
+        myLabel.frame = CGRect(x: 20, y: 8, width: 320, height: 20)
+        myLabel.font = UIFont.systemFont(ofSize: 13)
+        myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+        myLabel.textColor = .gray
+
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.92, alpha: 1)
+        headerView.addSubview(myLabel)
+
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 38
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return ""
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, d MMM yyyy"
+            return "Activities on \(formatter.string(from: Date()))"
         } else {
             return "Notes"
         }

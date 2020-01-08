@@ -10,7 +10,7 @@
         <!--Log  Book-->
         <scene sceneID="mXL-iv-5Y2">
             <objects>
-                <viewController id="zmY-da-7Nu" customClass="LogbookViewController" customModule="StaraParentApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zmY-da-7Nu" customClass="LogbookViewController" customModule="STARA_Parent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f0k-rz-tol">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,20 +29,20 @@
                                 <rect key="frame" x="0.0" y="166" width="414" height="696"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="qln-1o-VDM">
-                                    <rect key="frame" x="0.0" y="99.5" width="414" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="99" width="414" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="logbookCell" id="8BA-Vm-tVC" customClass="LogbookTableViewCell" customModule="StaraParentApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="logbookCell" id="8BA-Vm-tVC" customClass="LogbookTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8BA-Vm-tVC" id="byo-Br-oUp">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBw-Iv-wls">
-                                                    <rect key="frame" x="16" y="11" width="382" height="21.5"/>
+                                                    <rect key="frame" x="16" y="11" width="382" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -94,7 +94,7 @@
         <!--Report's Detail-->
         <scene sceneID="XtJ-ge-zBG">
             <objects>
-                <viewController id="0YP-BP-E9f" customClass="TherapistDetailViewController" customModule="StaraParentApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0YP-BP-E9f" customClass="TherapistDetailViewController" customModule="STARA_Parent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lWO-AW-GvR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -140,7 +140,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailCell" rowHeight="128" id="Fgg-kG-2QP" customClass="DetailTableViewCell" customModule="StaraParentApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailCell" rowHeight="128" id="Fgg-kG-2QP" customClass="DetailTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="128"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fgg-kG-2QP" id="bvc-75-a8G">
@@ -192,7 +192,7 @@
                                             <outlet property="promptLabel" destination="KFG-sk-qvs" id="6cz-2F-Pxd"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notesCell" rowHeight="55" id="UXa-fg-P5x" customClass="NotesTableViewCell" customModule="StaraParentApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notesCell" rowHeight="55" id="UXa-fg-P5x" customClass="NotesTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="156" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UXa-fg-P5x" id="UGi-ZQ-lkK">
@@ -249,7 +249,7 @@
         <!--Report's Detail-->
         <scene sceneID="3jL-2P-eEt">
             <objects>
-                <viewController id="ivv-dB-vUy" customClass="ParentsDetailViewController" customModule="StaraParentApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ivv-dB-vUy" customClass="ParentsDetailViewController" customModule="STARA_Parent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jSP-LQ-i5q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -260,8 +260,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu2-MS-qB0">
-                                <rect key="frame" x="16" y="136" width="382" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu2-MS-qB0">
+                                <rect key="frame" x="16" y="136" width="382" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -288,11 +288,11 @@
             </objects>
             <point key="canvasLocation" x="2630" y="377"/>
         </scene>
-        <!--Item-->
+        <!--Log Book-->
         <scene sceneID="qkQ-yE-Z3m">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2y7-b8-WQA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="zpM-lz-su7"/>
+                    <tabBarItem key="tabBarItem" title="Log Book" image="Materials inactive " selectedImage="Materials active" id="zpM-lz-su7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ysp-ka-TLn">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -310,7 +310,7 @@
         <!--View Detail View Controller-->
         <scene sceneID="5CO-Wh-F6E">
             <objects>
-                <viewController id="ONO-7Z-rEl" customClass="ViewDetailViewController" customModule="StaraParentApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ONO-7Z-rEl" customClass="ViewDetailViewController" customModule="STARA_Parent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xnE-ng-OmU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -506,5 +506,9 @@
             <point key="canvasLocation" x="3689.8550724637685" y="1163.1696428571429"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Materials active" width="30" height="28"/>
+        <image name="Materials inactive " width="30" height="28"/>
+    </resources>
     <color key="tintColor" red="0.72549019609999998" green="0.51764705879999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
