@@ -50,7 +50,7 @@ class TherapistDetailViewController: UIViewController, AVAudioPlayerDelegate {
         
         let recordingPlay = UIImage(named: "Recordings Play")?.withRenderingMode(.alwaysOriginal)
         audioAttachmentButton.setImage(recordingPlay, for: .normal)
-        attachmentView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        //attachmentView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
     }
     
     
@@ -148,7 +148,7 @@ extension TherapistDetailViewController: UITableViewDataSource, UITableViewDeleg
         myLabel.textColor = .gray
 
         let headerView = UIView()
-        headerView.backgroundColor = UIColor(red: 0.97, green: 0.97, blue: 0.97, alpha: 1)
+        headerView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         headerView.addSubview(myLabel)
 
         return headerView
