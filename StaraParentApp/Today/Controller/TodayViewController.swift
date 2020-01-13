@@ -219,7 +219,7 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate, UITex
         myLabel.textColor = .gray
 
         let headerView = UIView()
-        headerView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.92, alpha: 1)
+        headerView.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1)
         headerView.addSubview(myLabel)
 
         return headerView
