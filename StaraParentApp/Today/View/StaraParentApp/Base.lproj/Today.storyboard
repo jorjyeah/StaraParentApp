@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Molly-->
+        <!--Albert-->
         <scene sceneID="uRq-RO-6L9">
             <objects>
                 <viewController id="vlH-Qp-l7e" customClass="TodayViewController" customModule="STARA_Parent" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="96" width="414" height="870"/>
                                 <color key="backgroundColor" red="0.95686274509803915" green="0.95685130360000004" blue="0.95686346290000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="gzp-PY-TIC">
-                                    <rect key="frame" x="0.0" y="223" width="414" height="439"/>
+                                    <rect key="frame" x="0.0" y="239" width="414" height="439"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attachments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fck-1V-Ssc">
@@ -102,33 +102,33 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="activityListCell" rowHeight="112" id="Iy9-cP-bZx" customClass="ActivityListTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="112"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="activityListCell" rowHeight="128" id="Iy9-cP-bZx" customClass="ActivityListTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="128"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iy9-cP-bZx" id="pu6-Ll-OLh">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="112"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9W-f2-FVZ">
-                                                    <rect key="frame" x="16" y="0.0" width="382" height="21"/>
+                                                    <rect key="frame" x="16" y="16" width="382" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9A-fa-ML0">
-                                                    <rect key="frame" x="16" y="29" width="382" height="18"/>
+                                                    <rect key="frame" x="16" y="45" width="382" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZz-jd-p2L">
-                                                    <rect key="frame" x="16" y="55" width="382" height="18"/>
+                                                    <rect key="frame" x="16" y="71" width="382" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TyX-ek-4R8">
-                                                    <rect key="frame" x="328" y="80" width="70" height="16"/>
+                                                    <rect key="frame" x="328" y="96" width="70" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                     <color key="textColor" red="0.72549019609999998" green="0.51764705879999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -136,8 +136,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="a9W-f2-FVZ" secondAttribute="trailing" constant="16" id="4WT-0m-0Sq"/>
+                                                <constraint firstItem="a9W-f2-FVZ" firstAttribute="top" secondItem="pu6-Ll-OLh" secondAttribute="top" constant="16" id="5j0-Qr-c4j"/>
                                                 <constraint firstAttribute="trailing" secondItem="xZz-jd-p2L" secondAttribute="trailing" constant="16" id="62j-Bb-EMR"/>
-                                                <constraint firstItem="a9W-f2-FVZ" firstAttribute="top" secondItem="pu6-Ll-OLh" secondAttribute="top" id="AIn-v2-qp4"/>
                                                 <constraint firstItem="xZz-jd-p2L" firstAttribute="top" secondItem="V9A-fa-ML0" secondAttribute="bottom" constant="8" id="HHe-6c-gkY"/>
                                                 <constraint firstAttribute="bottom" secondItem="TyX-ek-4R8" secondAttribute="bottom" constant="16" id="IJG-0x-QC5"/>
                                                 <constraint firstAttribute="trailing" secondItem="TyX-ek-4R8" secondAttribute="trailing" constant="16" id="J92-Es-YOB"/>
@@ -156,7 +156,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="notesListCell" rowHeight="55" id="oEl-iC-MT2" customClass="NotesListTableViewCell" customModule="STARA_Parent" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="140" width="414" height="55"/>
+                                        <rect key="frame" x="0.0" y="156" width="414" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oEl-iC-MT2" id="Ec9-fh-BGD">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
@@ -197,7 +197,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hwA-4x-qLy"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Molly" id="XRP-TR-2Hf">
+                    <navigationItem key="navigationItem" title="Albert" id="XRP-TR-2Hf">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="person.2.fill" catalog="system" style="plain" id="rWt-oc-6UI">
                             <inset key="largeContentSizeImageInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
                             <connections>
