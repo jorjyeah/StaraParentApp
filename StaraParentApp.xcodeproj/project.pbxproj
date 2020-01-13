@@ -189,12 +189,12 @@
 			isa = PBXGroup;
 			children = (
 				680B66A623B8904E0093C8AF /* TodayViewController.swift */,
-				680B669423B7CE440093C8AF /* SelectProfileViewController.swift */,
+				B91DEDA123C508DF003CDBA2 /* TodayExtensionViewController.swift */,
 				680B669C23B7DACA0093C8AF /* AddProfileViewController.swift */,
+				B91DEDA323C50ABC003CDBA2 /* AddProfileExtensionViewController.swift */,
+				680B669423B7CE440093C8AF /* SelectProfileViewController.swift */,
 				680B669E23B7DAD80093C8AF /* AddTherapistViewController.swift */,
 				680B66A023B888C70093C8AF /* ActivicityDetailViewController.swift */,
-				B91DEDA123C508DF003CDBA2 /* TodayExtensionViewController.swift */,
-				B91DEDA323C50ABC003CDBA2 /* AddProfileExtensionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

@@ -281,8 +281,10 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate, UITex
             let cell = tableView.dequeueReusableCell(withIdentifier: "notesListCell", for: indexPath) as!  NotesListTableViewCell
             if therapyNotes == ""{
                 cell.notesLabel.text = "There's no note from the therapist"
+                cell.notesLabel.textColor = UIColor.lightGray
             } else {
                 cell.notesLabel.text = therapyNotes
+                cell.notesLabel.textColor = UIColor.black
             }
             
             return  cell
