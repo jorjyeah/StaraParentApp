@@ -30,6 +30,7 @@ class SelectProfileViewController: UIViewController {
         super.viewDidLoad()
         populateChildren()
         populateDetailsChild()
+        profilePictureImageView.layer.cornerRadius = 68
         tableView.allowsMultipleSelection = true
         // MARK: - Styling
         navigationController?.navigationBar.backItem?.title = "Back"
@@ -178,7 +179,7 @@ extension SelectProfileViewController: UITableViewDelegate, UITableViewDataSourc
             therapistListArray[indexPath.row].isSelected = true
             therapistSelected = therapistListArray[indexPath.row]
             let userDefaults = UserDefaults.standard
-            userDefaults.set(therapistSelected?.therapistRecordID, forKey: "selectedTherapist")
+            userDefaults.set(therapistSelected?.userReference, forKey: "selectedTherapist")
         } else if indexPath.section == 2{
             performSegue(withIdentifier: "showQRCode", sender: self)
         }

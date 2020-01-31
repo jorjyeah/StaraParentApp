@@ -11,11 +11,17 @@ import CloudKit
 class TherapySessionManager{
     class func getTherapySession(onComplete: @escaping ([TherapySessionModel]) -> Void){
         var therapySessionModel = [TherapySessionModel]()
-//        
+//        dynamic based on selected student and therapist
 //        let therapistID = String(UserDefaults.standard.string(forKey: "selectedTherapist")!)
 //        let studentID = String(UserDefaults.standard.string(forKey: "selectedStudent")!)
-        let therapistID = "_ea0bc15cf2724fb7d557dc0049ecdb01"
-        let studentID = "BC2819E0-35A0-174D-7CE4-2AB632112361"
+        
+        // ALBERT - George
+        let therapistID = "_731c76d4c0c940893be5a27ee267e538"
+        let studentID = "091A826D-28AE-1967-8FCF-C625BFBEFF7B"
+        
+        // DEA TANIA - Daniel
+//        let therapistID = "_5e1d27febf7ab4148e69767ad6b9b4d3"
+//        let studentID = "3DCB87C9-2EB4-7FB1-BFD3-27782FFA4DD1"
         
         let studentReference = CKRecord.Reference(recordID: CKRecord.ID(recordName: studentID), action: .none)
         let therapistReference = CKRecord.Reference(recordID: CKRecord.ID(recordName: therapistID), action: .none)

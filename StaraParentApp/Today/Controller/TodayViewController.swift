@@ -87,16 +87,21 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
         
         reloadGroup.enter()
         TherapySessionManager.getTherapySession { (arrayOfTherapySession) in
-            self.therapySession = arrayOfTherapySession
-            self.therapyNotes = arrayOfTherapySession[0].therapySessionNotes
-            self.therapyRecordID = arrayOfTherapySession[0].therapySessionRecordID
+            if arrayOfTherapySession.count != 0{
+                self.therapySession = arrayOfTherapySession
+                self.therapyNotes = arrayOfTherapySession[0].therapySessionNotes
+                self.therapyRecordID = arrayOfTherapySession[0].therapySessionRecordID
+                reloadGroup.leave()
+            } else {
+                reloadGroup.leave()
+            }
 //            let formatter = DateFormatter()
 //            formatter.dateFormat = "EEEE, d MMM yyyy"
 //            DispatchQueue.main.async {
 //                self.todayDateLabel.text = "Activities on \(formatter.string(from: arrayOfTherapySession[0].therapySessionDate))" // diganti date dari Data
 //            }
             
-            reloadGroup.leave()
+//            reloadGroup.leave()
         }
         
         
