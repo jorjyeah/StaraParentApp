@@ -63,6 +63,20 @@ class TherapistDataModel: NSObject{
         }
     }
     
+    var userReference : String{
+        get{
+            guard let therapistRecordID = record?.value(forKey: "userReference") else {
+                return "No Parent"
+            }
+            let recordRef = self.record?.value(forKey: "userReference") as! CKRecord.Reference
+            let recordID = recordRef.recordID.recordName
+            return recordID
+        }
+        set{
+            self.record?.setValue(newValue, forKey: "userReference")
+        }
+    }
+    
     var isSelected =  false
 
     init(record: CKRecord){

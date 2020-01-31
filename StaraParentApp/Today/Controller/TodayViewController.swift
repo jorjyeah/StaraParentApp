@@ -87,16 +87,21 @@ class TodayViewController: UIViewController, AVAudioPlayerDelegate {
         
         reloadGroup.enter()
         TherapySessionManager.getTherapySession { (arrayOfTherapySession) in
-            self.therapySession = arrayOfTherapySession
-            self.therapyNotes = arrayOfTherapySession[0].therapySessionNotes
-            self.therapyRecordID = arrayOfTherapySession[0].therapySessionRecordID
+            if arrayOfTherapySession.count != 0{
+                self.therapySession = arrayOfTherapySession
+                self.therapyNotes = arrayOfTherapySession[0].therapySessionNotes
+                self.therapyRecordID = arrayOfTherapySession[0].therapySessionRecordID
+                reloadGroup.leave()
+            } else {
+                reloadGroup.leave()
+            }
 //            let formatter = DateFormatter()
 //            formatter.dateFormat = "EEEE, d MMM yyyy"
 //            DispatchQueue.main.async {
 //                self.todayDateLabel.text = "Activities on \(formatter.string(from: arrayOfTherapySession[0].therapySessionDate))" // diganti date dari Data
 //            }
             
-            reloadGroup.leave()
+//            reloadGroup.leave()
         }
         
         
@@ -281,8 +286,10 @@ extension TodayViewController: UITableViewDataSource, UITableViewDelegate, UITex
             let cell = tableView.dequeueReusableCell(withIdentifier: "notesListCell", for: indexPath) as!  NotesListTableViewCell
             if therapyNotes == ""{
                 cell.notesLabel.text = "There's no note from the therapist"
+                cell.notesLabel.textColor = UIColor.lightGray
             } else {
                 cell.notesLabel.text = therapyNotes
+                cell.notesLabel.textColor = UIColor.black
             }
             
             return  cell

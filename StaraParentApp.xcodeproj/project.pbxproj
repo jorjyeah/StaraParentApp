@@ -105,7 +105,7 @@
 		B931FF0A23B75C19003F2B9E /* DetailedReportDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedReportDataManager.swift; sourceTree = "<group>"; };
 		B931FF0C23B75C93003F2B9E /* DetailedReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedReportModel.swift; sourceTree = "<group>"; };
 		B931FF0E23B7662E003F2B9E /* ReadableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableData.swift; sourceTree = "<group>"; };
-		B9B8E7C423AE09670071D058 /* STARA Parent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "STARA Parent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9B8E7C423AE09670071D058 /* STARA Parents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "STARA Parents.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B8E7C723AE09670071D058 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9B8E7C923AE09670071D058 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B9B8E7CB23AE09670071D058 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -189,12 +189,12 @@
 			isa = PBXGroup;
 			children = (
 				680B66A623B8904E0093C8AF /* TodayViewController.swift */,
-				680B669423B7CE440093C8AF /* SelectProfileViewController.swift */,
+				B91DEDA123C508DF003CDBA2 /* TodayExtensionViewController.swift */,
 				680B669C23B7DACA0093C8AF /* AddProfileViewController.swift */,
+				B91DEDA323C50ABC003CDBA2 /* AddProfileExtensionViewController.swift */,
+				680B669423B7CE440093C8AF /* SelectProfileViewController.swift */,
 				680B669E23B7DAD80093C8AF /* AddTherapistViewController.swift */,
 				680B66A023B888C70093C8AF /* ActivicityDetailViewController.swift */,
-				B91DEDA123C508DF003CDBA2 /* TodayExtensionViewController.swift */,
-				B91DEDA323C50ABC003CDBA2 /* AddProfileExtensionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -255,7 +255,7 @@
 		B9B8E7C523AE09670071D058 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B9B8E7C423AE09670071D058 /* STARA Parent.app */,
+				B9B8E7C423AE09670071D058 /* STARA Parents.app */,
 				B9B8E7DD23AE09690071D058 /* StaraParentAppTests.xctest */,
 				B9B8E7E823AE09690071D058 /* StaraParentAppUITests.xctest */,
 			);
@@ -406,7 +406,7 @@
 			);
 			name = StaraParentApp;
 			productName = StaraParentApp;
-			productReference = B9B8E7C423AE09670071D058 /* STARA Parent.app */;
+			productReference = B9B8E7C423AE09670071D058 /* STARA Parents.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B9B8E7DC23AE09690071D058 /* StaraParentAppTests */ = {
@@ -750,7 +750,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jorjyeah.StaraParentApp;
-				PRODUCT_NAME = "STARA Parent";
+				PRODUCT_NAME = "STARA Parents";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -771,7 +771,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jorjyeah.StaraParentApp;
-				PRODUCT_NAME = "STARA Parent";
+				PRODUCT_NAME = "STARA Parents";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
